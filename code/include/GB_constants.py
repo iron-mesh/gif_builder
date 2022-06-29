@@ -16,7 +16,7 @@ class Modes (enum.IntEnum):
     SOUND = 4
 
 @enum.unique
-class MediaType:
+class MediaType(enum.IntEnum):
     VIDEO = 0
     IMAGE = 1
 
