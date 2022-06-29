@@ -4,6 +4,8 @@
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 import logging
 import pickle, os, copy, winsound, importlib
+import re
+
 import include.GB_constants as GBC
 
 # from PySide2.QtCore import *
@@ -54,6 +56,7 @@ class GIFBuilder (QMainWindow):
         self.ui.moveup_button.clicked.connect(lambda :self._on_move_row(direction='U'))
         self.ui.movedown_button.clicked.connect(lambda :self._on_move_row(direction='D'))
         self.ui.start_button.clicked.connect(self._on_start_button)
+        self.ui.manual_button.clicked.connect(self._on_open_manual)
         # other initialization
         self.load_settings()
         self._projfile_path:str = ""
@@ -67,6 +70,7 @@ class GIFBuilder (QMainWindow):
         self.ui.tableView.delete_task_clicked.connect(self._on_delete_item)
         self.ui.tableView.exportdir_clicked.connect(self._on_export_dir)
         self.ui.tableView.sourcedir_clicked.connect(self._on_source_dir)
+        self.ui.tableView.change_activity_all_clicked.connect(self.set_activity_status_all_tasks)
         self._task_list_model:QStandardItemModel = QStandardItemModel()
         self.ui.tableView.setModel(self._task_list_model)
         self.ui.tableView.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
@@ -91,6 +95,7 @@ class GIFBuilder (QMainWindow):
         self._task_list_model.itemChanged.connect(self._on_item_changed)
         self.ui.cb_language.currentIndexChanged.connect(self._lang_changed)
 
+
         # task handler declaration
         self._task_handler = TaskHandler(self)
         self._task_handler.task_changed.connect(self._on_taskhandler_response, Qt.QueuedConnection)
@@ -100,19 +105,33 @@ class GIFBuilder (QMainWindow):
         # self._sound_effect.setVolume(1)
         # translator
         self._translator = QTranslator()
+        self._translatorQt = QTranslator()
         self._lang_changed(self.settings.language_index)
 
-
+    @Slot()
     def _lang_changed(self,index:int):
         if index == 1:
             self._translator.load("./resources/cgifbuilder_en-ru.qm")
+            self._translatorQt.load("./resources//qtbase_ru.qm")
             app.installTranslator(self._translator)
+            app.installTranslator(self._translatorQt)
         elif index == 0:
             app.removeTranslator(self._translator)
+            app.removeTranslator(self._translatorQt)
         self.ui.retranslateUi(self)
         self.retranslateUi()
 
-
+    @Slot()
+    def _on_open_manual(self):
+        file_list:list = os.listdir("./resources")
+        cur_lang:str = self.ui.cb_language.currentText()
+        manual_url:str = ""
+        regex = re.compile(r".*" + cur_lang + r"\.pdf", re.I)
+        for f in file_list:
+            if regex.search(f):
+                manual_url = os.path.abspath(r"./resources") + f"/{f}"
+                os.startfile(manual_url)
+                return
 
 
     @check_workingstate2
@@ -253,9 +272,9 @@ class GIFBuilder (QMainWindow):
         file.open(QIODevice.ReadOnly)
         input = QDataStream(file)
         version_of_saver = input.readString()
-        logging.debug(f"version_of_saver: {version_of_saver}")
+        logging.debug(f"version_of_saver: <b>{version_of_saver}</b>")
         if(version_of_saver not in COMPATIBLE_VERSION_LIST):
-            QMessageBox.warning(self, GBC.LC_ERROR, GBC.LC_MSG_NOTCOMPITABLE)
+            QMessageBox.warning(self, GBC.LC_ERROR, f"{GBC.LC_MSG_NOTCOMPITABLE} {version_of_saver}")
             return
 
         item_list = []
@@ -299,7 +318,10 @@ class GIFBuilder (QMainWindow):
 
     @Slot()
     def _on_supp_proj(self):
-        url = QUrl(URL_SUPPPROJECT)
+        if (self.settings.language_index == 1):
+            url = QUrl(URL_SUPPPROJECT[1])
+        else:
+            url = QUrl(URL_SUPPPROJECT[0])
         if not QDesktopServices.openUrl(url):
             QMessageBox.warning(self, GBC.LC_WARNING, GBC.LC_MSG_URLOPENERROR + url.path())
 
@@ -345,7 +367,6 @@ class GIFBuilder (QMainWindow):
             self.ui.start_button.setText(GBC.LC_CONVERT)
             self.ui.start_button.setStyleSheet("background-color: rgb(0, 255, 0); color: rgb(0, 0, 0)")
             self.ui.status_stack.setCurrentIndex(1)
-            self.ui.tableView.setEnabled(True)
             self._working_state = WorkingState.EDITING
             for r in range(self._task_list_model.rowCount()):
                 for c in range(self._task_list_model.columnCount()):
@@ -359,6 +380,7 @@ class GIFBuilder (QMainWindow):
         if is_started:
             for col in range(model.columnCount()):
                 model.item(response.model_row, col).setBackground(QBrush(QColor(73, 148, 252)))
+            self.ui.tableView.scrollTo(model.index(response.model_row, 0), hint=QAbstractItemView.PositionAtCenter)
             if response.current == 1:
                 self.ui.progressBar.setMinimum(0)
                 self.ui.progressBar.setMaximum(response.remain)
@@ -366,6 +388,7 @@ class GIFBuilder (QMainWindow):
             brush = QBrush(QColor(140, 255, 125) if response.is_successful else QColor(255, 129, 125))
             for col in range(model.columnCount()):
                 model.item(response.model_row, col).setBackground(brush)
+            self._task_handler.set_pause(False)
 
         self.ui.current_task_lcd.display(response.current)
         self.ui.remain_tasks_lcd.display(response.remain)
@@ -378,6 +401,7 @@ class GIFBuilder (QMainWindow):
         self._working_state = WorkingState.PROCESSING_FINISHED
         self.ui.start_button.setText(GBC.LC_BACK)
         self.ui.start_button.setStyleSheet("background-color: rgb(0, 0, 255); color: rgb(255, 255, 255)")
+        self.ui.tableView.setEnabled(True)
         #play sound
         if self.ui.soound_alert_checkBox.checkState() and os.path.exists(self.settings.sound_path):
             winsound.PlaySound(self.settings.sound_path, winsound.SND_FILENAME)
@@ -410,11 +434,12 @@ class GIFBuilder (QMainWindow):
     @Slot()
     def _on_dupli_task(self):
         buffer = []
-        row:int = self.ui.tableView.selectedIndexes()[0].row()
+        selected_row:int = self.ui.tableView.selectedIndexes()[0].row()
         model:QStandardItemModel = self.ui.tableView.selectedIndexes()[0].model()
         for col in range(model.columnCount()):
-            buffer.append(copy.deepcopy(model.item(row, col)))
-        model.insertRow(row + 1, buffer)
+            buffer.append(QStandardItem(model.item(selected_row, col)))
+        model.insertRow(selected_row + 1, buffer)
+        self._task_list_model.itemChanged.emit(QStandardItem())
 
     @Slot(int)
     def _on_soundalert_changed(self, state):
@@ -441,12 +466,20 @@ class GIFBuilder (QMainWindow):
 
     def retranslateUi(self):
         importlib.reload(GBC)
-        # importlib.reload(GBDET)
+        importlib.reload(GBDET)
         self._task_list_model.setHorizontalHeaderLabels(
             [GBC.LC_HEADERACTIVE, GBC.LC_HEADERSOURCEFILE, GBC.LC_HEADEREXPORTFILE, GBC.LC_HEADERSTARTFRAME, GBC.LC_HEADERENDFRAME,
              GBC.LC_HEADERFRAMERATE, GBC.LC_HEADERSCALE, GBC.LC_HEADERLOOP])
         self.ui.version_label.setText(VERSION)
         self.ui.tableView.retranslateUi()
+        self._update_window_title()
+
+    @Slot(bool)
+    def set_activity_status_all_tasks(self, status:bool):
+        model = self._task_list_model
+        for row in range(model.rowCount()):
+            model.item(row, 0).setCheckState(Qt.Checked if status else Qt.Unchecked)
+
 
 
 

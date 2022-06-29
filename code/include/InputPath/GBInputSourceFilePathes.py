@@ -16,7 +16,7 @@ class QInputSourceFilePathes(QWidget):
     """ Class provides element of UI to input path(es) to video or image sequence"""
     path_changed = QtCore.Signal()
 
-    def __init__(self):
+    def __init__(self, parent):
         super().__init__()
         self._imp_media = ImportedMediaData()
         self._ui = Ui_Form()
@@ -81,10 +81,10 @@ class QInputSourceFilePathes(QWidget):
         self._ui.sb_end_frame.setEnabled(True)
         self._ui.sb_start_frame.setMaximum(mfp.frame_count)
         self._ui.sb_end_frame.setMaximum(mfp.frame_count)
-        self._ui.sb_start_frame.setMinimum(1)
-        self._ui.sb_end_frame.setMinimum(1)
         self._ui.sb_start_frame.setValue(1)
         self._ui.sb_end_frame.setValue(mfp.frame_count)
+        self._ui.sb_start_frame.setMinimum(1)
+        self._ui.sb_end_frame.setMinimum(1)
         self._imp_media.media_file_par = mfp
 
         if(not reset_framerange):

@@ -2,10 +2,10 @@ import enum
 
 from PySide2.QtCore import QCoreApplication
 
-LOGGING_DISABLED = False
+LOGGING_DISABLED = True
 
-VERSION = "1.0.0a"
-COMPATIBLE_VERSION_LIST = ["1.0.0a"]
+VERSION = "1.1.0"
+COMPATIBLE_VERSION_LIST = ["1.0.0", "1.1.0"]
 
 @enum.unique
 class Modes (enum.IntEnum):
@@ -15,6 +15,7 @@ class Modes (enum.IntEnum):
     SAVE_IMAGE = 3
     SOUND = 4
 
+@enum.unique
 class MediaType:
     VIDEO = 0
     IMAGE = 1
@@ -25,7 +26,7 @@ class WorkingState (enum.IntEnum):
     PROCESSING = 1
     PROCESSING_FINISHED = 2
 
-URL_SUPPPROJECT = QCoreApplication.translate("URL", "https://ironmesh.ru")
+URL_SUPPPROJECT = {0:"https://ironmesh.ru/en/other/support-projects", 1:"https://ironmesh.ru/ru/other/support-projects"}
 
 #translatable stings
 
@@ -34,7 +35,7 @@ LC_IMAGEFILE_FILTER = "(*.png *.jpg *.tif *.bmp *.tga)"
 LC_IMAGEFILE_FILTER_TITLE = QCoreApplication.translate("filter", "Images")
 LC_EXE_FILTER = "(*.exe)"
 LC_EXE_FILTER_TITLE = QCoreApplication.translate("filter", "Application")
-LC_VIDEOFILE_FILTER = "(*.webm *.mpeg *.mp4 *.avi *.flv *.mp2 *.mov)"
+LC_VIDEOFILE_FILTER = "(*.mp4 *.avi *.mov)"
 LC_VIDEOFILE_FILTER_TITLE = QCoreApplication.translate("filter", "Video")
 LC_SAVE_ANIMATION_FILTER = "(*.gif)"
 LC_SAVE_ANIMATION_FILTER_TITLE = QCoreApplication.translate("filter", "Animation")
@@ -78,9 +79,12 @@ LC_BACK = QCoreApplication.translate("interface", "Back")
 LC_CONVERT = QCoreApplication.translate("interface", "Convert")
 LC_TWQM_EDIT= QCoreApplication.translate("interface", "Edit")
 LC_TWQM_DELETE= QCoreApplication.translate("interface", "Delete")
-LC_TWQM_DUPLICATE= QCoreApplication.translate("interface", "Duplicate")
-LC_TWQM_EXPORTDIR= QCoreApplication.translate("interface", "Export Directory")
-LC_TWQM_SOURCEDIR= QCoreApplication.translate("interface", "Source Directory")
+LC_TWQM_DUPLICATE = QCoreApplication.translate("interface", "Duplicate")
+LC_TWQM_EXPORTDIR = QCoreApplication.translate("interface", "Export Directory")
+LC_TWQM_SOURCEDIR = QCoreApplication.translate("interface", "Source Directory")
+LC_TWQM_DEACTIVATEALL = QCoreApplication.translate("interface", "Deactivate All")
+LC_TWQM_ACTIVATEALL = QCoreApplication.translate("interface", "Activate All")
+LC_TWQM_ACTIVITY = QCoreApplication.translate("interface", "Activity")
 
 #translatable stings of tableview header
 
@@ -94,7 +98,7 @@ LC_HEADERSCALE = QCoreApplication.translate("interface", "Scale")
 LC_HEADERLOOP = QCoreApplication.translate("interface", "Loop Animation")
 
 #messages
-LC_MSG_NOTCOMPITABLE = QCoreApplication.translate("messages", r"Version of project file isn't compatible!")
+LC_MSG_NOTCOMPITABLE = QCoreApplication.translate("messages", "Version of project file isn't compatible! \n Project was created in version:")
 LC_MSG_DELETEALL = QCoreApplication.translate("messages", "All tasks will be deleted. Are you sure?")
 LC_MSG_NEWPROJECT = QCoreApplication.translate("messages", "Do you want to create new project?")
 LC_MSG_URLOPENERROR = QCoreApplication.translate("messages", "Cannot open link: ")

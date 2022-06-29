@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'main_windowTkKeKY.ui'
+## Form generated from reading UI file 'main_windowBjjalL.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -22,10 +22,13 @@ class Ui_MainWindow(object):
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.setWindowModality(Qt.NonModal)
         MainWindow.resize(1159, 758)
+        MainWindow.setContextMenuPolicy(Qt.DefaultContextMenu)
 #if QT_CONFIG(accessibility)
         MainWindow.setAccessibleName(u"")
 #endif // QT_CONFIG(accessibility)
         MainWindow.setIconSize(QSize(128, 128))
+        MainWindow.setDockOptions(QMainWindow.AllowTabbedDocks|QMainWindow.AnimatedDocks)
+        MainWindow.setUnifiedTitleAndToolBarOnMac(False)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout_5 = QVBoxLayout(self.centralwidget)
@@ -642,21 +645,6 @@ class Ui_MainWindow(object):
 
         self.formLayout.setWidget(0, QFormLayout.LabelRole, self.label_2)
 
-        self.cb_language = QComboBox(self.scrollAreaWidgetContents)
-        self.cb_language.addItem("")
-        self.cb_language.addItem("")
-        self.cb_language.setObjectName(u"cb_language")
-        sizePolicy10.setHeightForWidth(self.cb_language.sizePolicy().hasHeightForWidth())
-        self.cb_language.setSizePolicy(sizePolicy10)
-        self.cb_language.setFont(font10)
-#if QT_CONFIG(accessibility)
-        self.cb_language.setAccessibleName(u"")
-#endif // QT_CONFIG(accessibility)
-        self.cb_language.setCurrentText(u"English")
-        self.cb_language.setPlaceholderText(u"")
-
-        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.cb_language)
-
         self.label_3 = QLabel(self.scrollAreaWidgetContents)
         self.label_3.setObjectName(u"label_3")
         self.label_3.setFont(font10)
@@ -729,6 +717,49 @@ class Ui_MainWindow(object):
 
         self.formLayout.setWidget(5, QFormLayout.FieldRole, self.sb_default_framerate)
 
+        self.horizontalLayout_8 = QHBoxLayout()
+        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
+        self.cb_language = QComboBox(self.scrollAreaWidgetContents)
+        self.cb_language.addItem("")
+        self.cb_language.addItem("")
+        self.cb_language.setObjectName(u"cb_language")
+        sizePolicy10.setHeightForWidth(self.cb_language.sizePolicy().hasHeightForWidth())
+        self.cb_language.setSizePolicy(sizePolicy10)
+        self.cb_language.setFont(font10)
+#if QT_CONFIG(accessibility)
+        self.cb_language.setAccessibleName(u"")
+#endif // QT_CONFIG(accessibility)
+        self.cb_language.setCurrentText(u"English")
+        self.cb_language.setPlaceholderText(u"")
+
+        self.horizontalLayout_8.addWidget(self.cb_language)
+
+        self.horizontalSpacer_12 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_8.addItem(self.horizontalSpacer_12)
+
+        self.manual_button = QPushButton(self.scrollAreaWidgetContents)
+        self.manual_button.setObjectName(u"manual_button")
+        self.manual_button.setFont(font10)
+        self.manual_button.setCursor(QCursor(Qt.PointingHandCursor))
+        self.manual_button.setStyleSheet(u"QPushButton { color:rgb(85, 0, 255)}\n"
+"\n"
+":hover{\n"
+"		color:blue;\n"
+"		text-decoration: underline;\n"
+"}")
+        self.manual_button.setLocale(QLocale(QLocale.English, QLocale.UnitedKingdom))
+        self.manual_button.setFlat(True)
+
+        self.horizontalLayout_8.addWidget(self.manual_button)
+
+        self.horizontalSpacer = QSpacerItem(20, 20, QSizePolicy.Fixed, QSizePolicy.Minimum)
+
+        self.horizontalLayout_8.addItem(self.horizontalSpacer)
+
+
+        self.formLayout.setLayout(0, QFormLayout.FieldRole, self.horizontalLayout_8)
+
 
         self.verticalLayout_8.addLayout(self.formLayout)
 
@@ -790,6 +821,10 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_3.addWidget(self.support_button)
 
+        self.horizontalSpacer_11 = QSpacerItem(20, 20, QSizePolicy.Fixed, QSizePolicy.Minimum)
+
+        self.horizontalLayout_3.addItem(self.horizontalSpacer_11)
+
         self.line_5 = QFrame(self.centralwidget)
         self.line_5.setObjectName(u"line_5")
         self.line_5.setFrameShape(QFrame.VLine)
@@ -840,14 +875,12 @@ class Ui_MainWindow(object):
         QWidget.setTabOrder(self.soound_alert_checkBox, self.win_notification_checkBox)
         QWidget.setTabOrder(self.win_notification_checkBox, self.after_converting_combobox)
         QWidget.setTabOrder(self.after_converting_combobox, self.start_button)
-        QWidget.setTabOrder(self.start_button, self.support_button)
-        QWidget.setTabOrder(self.support_button, self.cb_language)
-        QWidget.setTabOrder(self.cb_language, self.sb_default_framerate)
+        QWidget.setTabOrder(self.start_button, self.sb_default_framerate)
         QWidget.setTabOrder(self.sb_default_framerate, self.settings_scrollArea)
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(1)
         self.status_stack.setCurrentIndex(1)
         self.cb_language.setCurrentIndex(0)
 
@@ -980,14 +1013,18 @@ class Ui_MainWindow(object):
         self.start_button.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+R", None))
 #endif // QT_CONFIG(shortcut)
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"Language", None))
-        self.cb_language.setItemText(0, QCoreApplication.translate("MainWindow", u"English", None))
-        self.cb_language.setItemText(1, QCoreApplication.translate("MainWindow", u"\u0420\u0443\u0441\u0441\u043a\u0438\u0439", None))
-
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"FFmpeg path", None))
         self.label_6.setText(QCoreApplication.translate("MainWindow", u"FFprobe path", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"Default export directory", None))
         self.label_7.setText(QCoreApplication.translate("MainWindow", u"Sound Alert", None))
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"Default framerate", None))
+        self.cb_language.setItemText(0, QCoreApplication.translate("MainWindow", u"English", None))
+        self.cb_language.setItemText(1, QCoreApplication.translate("MainWindow", u"\u0420\u0443\u0441\u0441\u043a\u0438\u0439", None))
+
+#if QT_CONFIG(tooltip)
+        self.manual_button.setToolTip(QCoreApplication.translate("MainWindow", u"Do you need help?", None))
+#endif // QT_CONFIG(tooltip)
+        self.manual_button.setText(QCoreApplication.translate("MainWindow", u"User Manual", None))
         self.authot_label.setText(QCoreApplication.translate("MainWindow", u"By Balakirev Ivan", None))
         self.support_button.setText(QCoreApplication.translate("MainWindow", u"Support this Project", None))
         self.version_label.setText(QCoreApplication.translate("MainWindow", u"v 1.0.0", None))

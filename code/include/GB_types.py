@@ -30,6 +30,12 @@ class MediaFileData:
         return f" framerate: {self.framerate} \n width: {self.width} \n height: {self.height} \n frame_count: {self.frame_count} \n type: {self.type} "
 
 
+@dataclass
+class FilterOptions:
+    stats_mode:str = 'full'
+    dither_mode: str = 'sierra2_4a'
+    bayer_scale: int = 2
+    diff_mode: str = 'none'
 
 @dataclass
 class ImportedMediaData:

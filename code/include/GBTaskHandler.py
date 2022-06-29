@@ -7,7 +7,7 @@ from os.path import *
 from .GB_types import *
 from .GB_constants import *
 from math import *
-import subprocess, re, logging, shutil, os, time
+import subprocess, re, logging, shutil, os
 
 logging.basicConfig(level=logging.DEBUG)
 if(LOGGING_DISABLED):
@@ -22,7 +22,7 @@ class TaskHandler(QThread):
         self._parent = parent
         self._temperal_dir:str = ""
         self.running:bool = True
-        self._temperal_dir: str = ""
+        self._paused: bool = False
         self._palette_path: str = ""
 
     def run(self) -> None:
@@ -41,36 +41,41 @@ class TaskHandler(QThread):
                 response.remain += 1
 
         for row in range(model.rowCount()):
+            while(self._paused):
+                pass
             if not self.running: break
             if (model.item(row, 0).checkState() == Qt.Unchecked): continue
             response.model_row = row
             response.current += 1
             logging.debug(">>>>task started>>>>")
             self.task_changed.emit(response, True)
-            #time.sleep(3)
 
             try:
                 if not self._is_valid_task(row): raise Exception("task isn't valid").with_traceback()
+                cmd_palette, cmd = self._generate_commands(row)
                 # pass 1 palette creation
-
+                with subprocess.Popen(cmd_palette, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE, startupinfo=startupinfo) as pr:
+                    data, err = pr.communicate(timeout=600)
+                    # logging.debug(f"data: {data}")
+                    logging.debug(f"pass 1 error: {err}")
+                    if err: raise Exception("Palette creation, FFmpeg Error").with_traceback()
                 # pass 2 exporting
-                with subprocess.Popen(self._generate_command(row), stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE, startupinfo=startupinfo) as pr:
+                with subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE, startupinfo=startupinfo) as pr:
                     data, err = pr.communicate(timeout=600)
                     # logging.debug(f"data: {data}")
                     logging.debug(f"pass 2 error: {err}")
-                    if err: raise Exception("FFmpeg Error").with_traceback()
+                    if err: raise Exception("Gif creation, FFmpeg Error").with_traceback()
             except Exception as msg:
-                logging.debug(f"Thread message:{msg}")
+                logging.debug(f"Thread message: {msg}")
                 response.is_successful = False
             else:
                 response.is_successful = True
 
             response.finished += 1
             response.remain -= 1
-            #time.sleep(3)
             logging.debug(">>>>task finished>>>>")
             self.task_changed.emit(response, False)
-            time.sleep(2)
+            self.set_pause(True)
             if self._temperal_dir and exists(self._temperal_dir):
                 shutil.rmtree(self._temperal_dir)
 
@@ -114,59 +119,85 @@ class TaskHandler(QThread):
         mode:int = imp_media_data.media_file_par.type
         first_frame: int = int(model.item(row, 3).text()) - 1
         last_frame: int = int(model.item(row, 4).text()) - 1
+        self._palette_path = os.path.dirname(model.item(row, 2).text()) + r"/palette.png"
         command:list[str] = [self._parent.settings.ffmpeg_path, "-y", "-loglevel", "error"]
         command_palette:list[str] = [self._parent.settings.ffmpeg_path, "-y", "-loglevel", "error"]
         if (mode == MediaType.VIDEO):
-            command.append("-i")
-            command_palette.append("-i")
-            command.append(imp_media_data.videofile_path)
-            command_palette.append(imp_media_data.videofile_path)
+            command.append("-i"); command_palette.append("-i")
+            command.append(imp_media_data.videofile_path); command_palette.append(imp_media_data.videofile_path)
+            command.append("-i") #palette
+            command.append(self._palette_path)
             # if (first_frame > 0):
             #     command.append("-start_number")
             #     command.append(str(first_frame))
             # if (last_frame - first_frame + 1) < imp_media_data.media_file_par.frame_count:
             #     command.append("-frames:v")
             #     command.append(str(last_frame - first_frame + 1))
-            if int(model.item(row, 5).text()) != imp_media_data.media_file_par.framerate:
+            if int(model.item(row, 5).text()) != imp_media_data.media_file_par.framerate: #video framerate
                 command.append("-r")
                 command.append(model.item(row, 5).text())
         else:
-            command.append("-f")
-            command.append("image2")
+            command.append("-f"); command_palette.append("-f")
+            command.append("image2"); command_palette.append("image2")
             command.append("-framerate")
             command.append(model.item(row, 5).text())
             inputfile_mask = self._get_imgseq_mask(row)
             if(inputfile_mask is not None):
-                command.append("-start_number")
-                command.append(str(inputfile_mask[1]))
-                command.append("-i")
-                command.append(inputfile_mask[0])
+                command.append("-start_number"); command_palette.append("-start_number")
+                command.append(str(inputfile_mask[1])); command_palette.append(str(inputfile_mask[1]))
+                command.append("-i"); command_palette.append("-i")
+                command.append(inputfile_mask[0]); command_palette.append(inputfile_mask[0])
             else:
-                command.append("-i")
-                command.append(self._copy_images_to_temperal(row)[0])
+                command.append("-i"); command_palette.append("-i")
+                temperal_images_dir:str = self._copy_images_to_temperal(row)[0]
+                command.append(temperal_images_dir); command_palette.append(temperal_images_dir)
+            command.append("-i")
+            command.append(self._palette_path)
             if (inputfile_mask is not None) and ((last_frame - first_frame + 1) < imp_media_data.media_file_par.frame_count):
-                command.append("-frames:v")
-                command.append(str(last_frame - first_frame + 1))
+                command.append("-frames:v"); command_palette.append("-frames:v")
+                frame_count:str = str(last_frame - first_frame + 1)
+                command.append(frame_count); command_palette.append(frame_count)
         vfilter_list = []
         if (mode == MediaType.VIDEO) and (first_frame > 0 or ((last_frame - first_frame + 1) < imp_media_data.media_file_par.frame_count)):
             vfilter_list.append(f"select = 'between(n, {first_frame}, {last_frame})'")
-            # command.append("-vsync")
-            # command.append("0")
         scale: int = int(model.item(row, 6).text())
         if(scale < 100):
             original_width = imp_media_data.media_file_par.width
             original_height = imp_media_data.media_file_par.height
-            vfilter_list.append(f"scale={trunc(original_width * scale / 100)}:{trunc(original_height * scale / 100)}")
-        if vfilter_list:
-            command.append("-vf")
-            command.append(", ".join(vfilter_list))
+            vfilter_list.append(f"scale={trunc(original_width * scale / 100)}:{trunc(original_height * scale / 100)}:flags=lanczos")
+        command_palette.append("-vf")
+        logging.debug(self._join_args(vfilter_list, lst_char=', '))
+        command_palette.append(self._join_args(vfilter_list, lst_char=', ') + self._get_filter_options(row, mode = "palettegen"))
+        command.append("-lavfi")
+        command.append(self._join_args(vfilter_list, lst_char=(' 'if scale<100 else ',')) + ("[x];[x][1:v]" if scale<100 else "") + self._get_filter_options(row, mode = "paletteuse"))
         if model.item(row, 7).checkState() == Qt.Unchecked:
             command.append("-loop")
             command.append("-1")
-        command.append(model.item(row, 2).text())
-        logging.debug(command)
-        return command
 
+        # command.append("-vsync")
+        # command.append("0")
+        command.append(model.item(row, 2).text())
+        command_palette.append(self._palette_path)
+
+        logging.debug(f"pallete command: {command_palette}")
+        logging.debug(f"command: {command}")
+
+        return command_palette, command
+
+    def _join_args(self, arg_list:list, lst_char:str="")->str:
+        if arg_list:
+            return ", ".join(arg_list) + lst_char
+        else:
+            return ""
+
+    def _get_filter_options(self, row:int, mode:str):
+        model: QStandardItemModel = self._parent._task_list_model
+        filter_options:FilterOptions = model.item(row, 2).data(role = Qt.UserRole)
+        if mode == "palettegen":
+            return f"palettegen=stats_mode={filter_options.stats_mode}"
+        elif mode == "paletteuse":
+            bayer_scale:str = f":bayer_scale={filter_options.bayer_scale}" if filter_options.dither_mode == 'bayer' else ''
+            return f"paletteuse=dither={filter_options.dither_mode}:diff_mode={filter_options.diff_mode}{bayer_scale}"
 
     def _copy_images_to_temperal(self, row:int) -> tuple:
         """Copy files into temperal directory and
@@ -188,6 +219,9 @@ class TaskHandler(QThread):
             img_index += 1
         self._temperal_dir = temperal_dir
         return (f"{temperal_dir}/img_%d{extention}", temperal_dir)
+
+    def set_pause(self, status:bool):
+        self._paused = status
 
 
 

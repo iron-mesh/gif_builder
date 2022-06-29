@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'input_source_file_pathesELDrxP.ui'
+## Form generated from reading UI file 'input_source_file_pathesnRLpvG.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -92,7 +92,8 @@ class Ui_Form(object):
         self.sb_start_frame.setAutoFillBackground(False)
         self.sb_start_frame.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
         self.sb_start_frame.setReadOnly(False)
-        self.sb_start_frame.setMaximum(0)
+        self.sb_start_frame.setMinimum(1)
+        self.sb_start_frame.setMaximum(1)
 
         self.verticalLayout_2.addWidget(self.sb_start_frame)
 
@@ -118,7 +119,8 @@ class Ui_Form(object):
         self.sb_end_frame.setFont(font2)
         self.sb_end_frame.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
         self.sb_end_frame.setReadOnly(False)
-        self.sb_end_frame.setMaximum(0)
+        self.sb_end_frame.setMinimum(1)
+        self.sb_end_frame.setMaximum(1)
 
         self.verticalLayout_4.addWidget(self.sb_end_frame)
 
