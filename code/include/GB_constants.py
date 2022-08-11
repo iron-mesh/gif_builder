@@ -15,7 +15,7 @@ class Modes (enum.IntEnum):
     SAVE_IMAGE = 3
     SOUND = 4
 
-@enum.unique
+
 class MediaType(enum.IntEnum):
     VIDEO = 0
     IMAGE = 1
@@ -27,7 +27,7 @@ class WorkingState (enum.IntEnum):
     PROCESSING_FINISHED = 2
 
 URL_SUPPPROJECT = {0:"https://ironmesh.ru/en/other/support-projects", 1:"https://ironmesh.ru/ru/other/support-projects"}
-
+URL_AUTHOR_PAGE = "https://ironmesh.ru/about"
 #translatable stings
 
 #filters for file dialog
@@ -55,8 +55,6 @@ LC_SAVE_PROJECT_FILE_TITLE = QCoreApplication.translate("file_dialog", "Save Pro
 LC_SAVEAS_PROJECT_FILE_TITLE = QCoreApplication.translate("file_dialog", "Save Project As")
 LC_OPEN_PROJECT_FILE_TITLE = QCoreApplication.translate("file_dialog", "Open Project")
 LC_OPEN_SOUND_TITLE = QCoreApplication.translate("file_dialog", "Select Sound File")
-
-
 
 #translatable stings of GUI titles
 LC_FRAMERATE = QCoreApplication.translate("interface", "Framerate")
@@ -105,4 +103,5 @@ LC_MSG_URLOPENERROR = QCoreApplication.translate("messages", "Cannot open link: 
 LC_MSG_EXT_NOT_EQUAL = QCoreApplication.translate("messages", "File formats must be the same")
 LC_MSG_EXIT_SAVE_QUESTION = QCoreApplication.translate("messages", "Do you want to save current project?")
 LC_MSG_FFMPEG_PATH_NOT_CORRECT = QCoreApplication.translate("messages", "FFmpeg path is not correct or undefined!")
+LC_MSG_FFPROBE_PATH_NOT_CORRECT = QCoreApplication.translate("messages", "FFprobe path is not correct or undefined!")
 LC_MSG_SOUND_ISNT_SELECTED = QCoreApplication.translate("messages", "Sound file isn't selected. Go to Setting to select it.")

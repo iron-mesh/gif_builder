@@ -1,8 +1,8 @@
 import logging
-import sys
+import sys, os
 
 from PySide2 import QtCore
-from PySide2.QtGui import QFont
+from PySide2.QtGui import QFont, QIcon
 from PySide2.QtWidgets import QWidget, QPushButton, QLineEdit, QHBoxLayout, QFileDialog, QApplication, QVBoxLayout, QLabel
 
 from .. import GB_constants as GBC
@@ -20,14 +20,23 @@ class QInputPath(QWidget):
         self._mode = mode
         self.line_edit = QLineEdit(path)
         self.line_edit.setFont(QFont('Arial', 11))
-        self.button = QPushButton("...")
-        self.button.clicked.connect(self._on_press_button)
+        self.button = QPushButton()
+        self.button_del = QPushButton()
+        icon = QIcon()
+        icon.addFile(os.path.join(".", r"resources/icons/open_folder.png"), QtCore.QSize(), QIcon.Normal, QIcon.Off)
+        icon_del = QIcon()
+        icon_del.addFile(os.path.join(".", r"resources/icons/delete.png"), QtCore.QSize(), QIcon.Normal, QIcon.Off)
+        self.button.setIcon(icon)
+        self.button_del.setIcon(icon_del)
+        self.button.clicked.connect(self._on_selectpath_button)
+        self.button_del.clicked.connect(self._on_delete_button)
 
         layout = QHBoxLayout(self)
         layout.addWidget(self.line_edit)
         layout.addWidget(self.button)
+        layout.addWidget(self.button_del)
 
-    def _on_press_button(self):
+    def _on_selectpath_button(self):
         buf_path = self.get_path()
         logging.debug("buf path: {0}".format(buf_path))
         if (self._mode == GBC.Modes.DIRPATH):
@@ -35,19 +44,29 @@ class QInputPath(QWidget):
         elif (self._mode == GBC.Modes.FILEPATH):
             path:str = QFileDialog.getOpenFileName(None, GBC.LC_SELECT_FILE_TITLE, self.get_path(), f"{GBC.LC_IMAGEFILE_FILTER_TITLE} {GBC.LC_IMAGEFILE_FILTER}") [0]
         elif (self._mode == GBC.Modes.EXEFILE):
-            path:str = QFileDialog.getOpenFileName(None, GBC.LC_SELECT_EXEC_FILE_TITLE, self.get_path(), f"{GBC.LC_EXE_FILTER_TITLE} {GBC.LC_EXE_FILTER}")[0]
+            if (sys.platform == "win32"):
+                path:str = QFileDialog.getOpenFileName(None, GBC.LC_SELECT_EXEC_FILE_TITLE, self.get_path(), f"{GBC.LC_EXE_FILTER_TITLE} {GBC.LC_EXE_FILTER}")[0]
+            else:
+                path: str = QFileDialog.getOpenFileName(None, GBC.LC_SELECT_EXEC_FILE_TITLE, self.get_path() )[0]
         elif (self._mode == GBC.Modes.SAVE_IMAGE):
             path:str = QFileDialog.getSaveFileName(None, GBC.LC_SAVE_ANIMATION_FILE_TITLE, self.get_path(), f"{GBC.LC_SAVE_ANIMATION_FILTER_TITLE} {GBC.LC_SAVE_ANIMATION_FILTER}")[0]
         elif (self._mode == GBC.Modes.SOUND):
             path: str = QFileDialog.getOpenFileName(None, GBC.LC_OPEN_SOUND_TITLE, self.get_path(), f"{GBC.LC_SOUND_FILTER_TITLE} {GBC.LC_SOUND_FILTER}")[0]
 
         if(path != buf_path and path):
-            logging.debug("current path: {0}".format(path))
+            logging.debug(f"current path: {path}")
             self.set_path(path)
             self.path_changed.emit(path)
 
+    def _on_delete_button(self):
+        self.line_edit.clear()
+
     def set_mode(self, mode:int) -> None:
         self._mode:int = mode
+        if mode == GBC.Modes.SAVE_IMAGE:
+            self.button_del.setVisible(False)
+        else:
+            self.button_del.setVisible(True)
 
     def get_mode(self) -> int:
         return self._mode
@@ -62,25 +81,7 @@ class QInputPath(QWidget):
         self.line_edit.setPlaceholderText(text)
 
 
-if __name__ == "__main__":
-    print("QInputPath test")
-    app = QApplication(sys.argv)
-    window = QWidget()
-    window.setWindowTitle("QInputPath test")
-    layout = QVBoxLayout(window)
-    layout.addWidget(QLabel("Select Dir"))
-    ip1 = QInputPath(mode = GBC.Modes.DIRPATH)
-    ip1.path_changed.connect(lambda s: logging.debug("path changed: {0}".format(s)))
-    layout.addWidget(ip1)
-    layout.addWidget(QLabel("Select Exe file"))
-    layout.addWidget(QInputPath(mode = GBC.Modes.EXEFILE))
-    layout.addWidget(QLabel("Select image file"))
-    layout.addWidget(QInputPath(mode=GBC.Modes.FILEPATH))
-    layout.addWidget(QLabel("Save image"))
-    layout.addWidget(QInputPath(mode=GBC.Modes.SAVE_IMAGE))
-    window.resize(500, 300)
-    window.show()
-    sys.exit(app.exec_())
+
 
 
 

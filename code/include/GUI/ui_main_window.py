@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'main_windowBjjalL.ui'
+## Form generated from reading UI file 'main_windownSJceQ.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -792,15 +792,24 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3.setSpacing(2)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
         self.horizontalLayout_3.setContentsMargins(-1, 0, -1, -1)
-        self.authot_label = QLabel(self.centralwidget)
-        self.authot_label.setObjectName(u"authot_label")
-        self.authot_label.setFont(font)
-#if QT_CONFIG(accessibility)
-        self.authot_label.setAccessibleName(u"")
-#endif // QT_CONFIG(accessibility)
-        self.authot_label.setLocale(QLocale(QLocale.English, QLocale.UnitedKingdom))
+        self.author_btn = QPushButton(self.centralwidget)
+        self.author_btn.setObjectName(u"author_btn")
+        self.author_btn.setFont(font)
+        self.author_btn.setCursor(QCursor(Qt.PointingHandCursor))
+        self.author_btn.setStyleSheet(u"QPushButton { color:rgb(85, 0, 255)}\n"
+"\n"
+":hover{\n"
+"		color:blue;\n"
+"		text-decoration: underline;\n"
+"}")
+        self.author_btn.setLocale(QLocale(QLocale.English, QLocale.UnitedKingdom))
+        self.author_btn.setText(u"By Balakirev Ivan")
+#if QT_CONFIG(shortcut)
+        self.author_btn.setShortcut(u"")
+#endif // QT_CONFIG(shortcut)
+        self.author_btn.setFlat(True)
 
-        self.horizontalLayout_3.addWidget(self.authot_label)
+        self.horizontalLayout_3.addWidget(self.author_btn)
 
         self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
@@ -1025,7 +1034,6 @@ class Ui_MainWindow(object):
         self.manual_button.setToolTip(QCoreApplication.translate("MainWindow", u"Do you need help?", None))
 #endif // QT_CONFIG(tooltip)
         self.manual_button.setText(QCoreApplication.translate("MainWindow", u"User Manual", None))
-        self.authot_label.setText(QCoreApplication.translate("MainWindow", u"By Balakirev Ivan", None))
         self.support_button.setText(QCoreApplication.translate("MainWindow", u"Support this Project", None))
         self.version_label.setText(QCoreApplication.translate("MainWindow", u"v 1.0.0", None))
     # retranslateUi

@@ -6,6 +6,7 @@ import subprocess, os, logging
 from .GB_types import *
 from .GB_constants import *
 from types import ModuleType
+from PySide2.QtWidgets import QMessageBox
 
 
 from importlib import reload
@@ -24,6 +25,7 @@ def rreload(module):
 
 
 def get_media_parameters(ffprobe_path:str, file_path:str, media_type:MediaType)->MediaFileData:
+    """ Returns parametres of mediafile"""
     cmd = [ffprobe_path, '-print_format', 'json', '-show_streams', '-count_frames', file_path]
     startupinfo = subprocess.STARTUPINFO()
     startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
@@ -45,12 +47,22 @@ def get_media_parameters(ffprobe_path:str, file_path:str, media_type:MediaType)-
     return result
 
 
-def check_workingstate2(f):
+def check_workingstate(f):
     def wrapper(self, *args, **kwargs):
         if (self._working_state == WorkingState.EDITING):
             f(self, *args, **kwargs)
         else:
             pass
+    return wrapper
+
+def check_ffprobe(f):
+    def wrapper(self, *args, **kwargs):
+        if (check_exefile(self.settings.ffprobe_path, "ffprobe")):
+            f(self, *args, **kwargs)
+        else:
+            QMessageBox.warning(self, LC_WARNING, LC_MSG_FFPROBE_PATH_NOT_CORRECT, QMessageBox.Ok,
+                                QMessageBox.Ok)
+            return
     return wrapper
 
 def check_exefile(path:str, match_str:str)->bool:

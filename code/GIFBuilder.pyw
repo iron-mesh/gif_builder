@@ -53,6 +53,7 @@ class GIFBuilder (QMainWindow):
         self.ui.save_button.clicked.connect(self._on_save_project)
         self.ui.saveAs_button.clicked.connect(lambda :self._on_save_project(save_as=True))
         self.ui.support_button.clicked.connect(self._on_supp_proj)
+        self.ui.author_btn.clicked.connect(self._on_author_btn)
         self.ui.moveup_button.clicked.connect(lambda :self._on_move_row(direction='U'))
         self.ui.movedown_button.clicked.connect(lambda :self._on_move_row(direction='D'))
         self.ui.start_button.clicked.connect(self._on_start_button)
@@ -134,7 +135,7 @@ class GIFBuilder (QMainWindow):
                 return
 
 
-    @check_workingstate2
+    @check_workingstate
     def on_show_settings(self, status:bool)->None:
         if status:
             self.ui.stackedWidget.setCurrentIndex(1)
@@ -177,7 +178,8 @@ class GIFBuilder (QMainWindow):
                 pickle.dump(buf_setting, s_file)
         self.settings = buf_setting
 
-    @check_workingstate2
+    @check_workingstate
+    @check_ffprobe
     @Slot()
     def _on_add_item(self)->None:
         def add_row():
@@ -195,7 +197,8 @@ class GIFBuilder (QMainWindow):
         if(res == QDialog.Accepted):
             add_row()
 
-    @check_workingstate2
+    @check_workingstate
+    @check_ffprobe
     @Slot()
     def _on_edit_item(self)->None:
         i_list = self.ui.tableView.selectedIndexes()
@@ -210,7 +213,7 @@ class GIFBuilder (QMainWindow):
         if (res == QDialog.Accepted):
             dialog.update_data(i_list)
 
-    @check_workingstate2
+    @check_workingstate
     @Slot()
     def _on_delete_item(self) -> None:
         i_list = self.ui.tableView.selectedIndexes()
@@ -218,7 +221,7 @@ class GIFBuilder (QMainWindow):
             self._task_list_model.removeRow(i_list[0].row())
             self._task_list_model.itemChanged.emit(QStandardItem())
 
-    @check_workingstate2
+    @check_workingstate
     @Slot()
     def _on_delete_all(self) -> None:
         if (self._task_list_model.rowCount() == 0): return
@@ -243,7 +246,7 @@ class GIFBuilder (QMainWindow):
         if not self._is_project_changed: self._is_project_changed = True
 
 
-    @check_workingstate2
+    @check_workingstate
     @Slot()
     def _on_new_project(self) -> None:
         logging.debug("_on_new_project")
@@ -261,7 +264,7 @@ class GIFBuilder (QMainWindow):
             self._update_window_title()
             self._is_project_changed = False
 
-    @check_workingstate2
+    @check_workingstate
     @Slot()
     def _on_open_project(self) -> None:
         path:str = QFileDialog.getOpenFileName(None, GBC.LC_OPEN_PROJECT_FILE_TITLE, self._projfile_path, f"{GBC.LC_PROJECTFILE_FILTER_TITLE} {GBC.LC_PROJECTFILE_FILTER}")[0]
@@ -290,7 +293,7 @@ class GIFBuilder (QMainWindow):
         self._update_window_title()
         self._is_project_changed = False
 
-    @check_workingstate2
+    @check_workingstate
     @Slot()
     def _on_save_project(self, save_as:bool = False) -> None:
         if(not self._projfile_path or save_as):
@@ -325,7 +328,14 @@ class GIFBuilder (QMainWindow):
         if not QDesktopServices.openUrl(url):
             QMessageBox.warning(self, GBC.LC_WARNING, GBC.LC_MSG_URLOPENERROR + url.path())
 
-    @check_workingstate2
+    @Slot()
+    def _on_author_btn(self):
+        url = QUrl(URL_AUTHOR_PAGE)
+        if not QDesktopServices.openUrl(url):
+            QMessageBox.warning(self, GBC.LC_WARNING, GBC.LC_MSG_URLOPENERROR + url.path())
+
+
+    @check_workingstate
     @Slot()
     def _on_move_row(self, direction ='U')->None:
         if not self.ui.tableView.selectedIndexes():return
@@ -414,6 +424,7 @@ class GIFBuilder (QMainWindow):
             os.system('shutdown -s')
         elif self.ui.after_converting_combobox.currentIndex() == 2: #restart
             os.system("shutdown /r /t  1")
+
 
 
     @Slot()
