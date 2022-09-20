@@ -24,7 +24,7 @@ def rreload(module):
             rreload(attribute)
 
 
-def get_media_parameters(ffprobe_path:str, file_path:str, media_type:MediaType)->MediaFileData:
+def get_media_parameters(ffprobe_path:str, file_path:str, media_type:MediaType)->MediaFileParameters:
     """ Returns parametres of mediafile"""
     cmd = [ffprobe_path, '-print_format', 'json', '-show_streams', '-count_frames', file_path]
     startupinfo = subprocess.STARTUPINFO()
@@ -32,7 +32,7 @@ def get_media_parameters(ffprobe_path:str, file_path:str, media_type:MediaType)-
     res = subprocess.run(cmd, capture_output=True, startupinfo=startupinfo)
     json_val = json.loads(res.stdout)
 
-    result = MediaFileData()
+    result = MediaFileParameters()
     result.width = int(json_val['streams'][0]['width'])
     result.height = int(json_val['streams'][0]['height'])
 

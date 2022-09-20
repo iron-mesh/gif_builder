@@ -1,0 +1,1912 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1159</width>
+    <height>758</height>
+   </rect>
+  </property>
+  <property name="contextMenuPolicy">
+   <enum>Qt::DefaultContextMenu</enum>
+  </property>
+  <property name="windowTitle">
+   <string>GIF Builder</string>
+  </property>
+  <property name="accessibleName">
+   <string notr="true"/>
+  </property>
+  <property name="iconSize">
+   <size>
+    <width>128</width>
+    <height>128</height>
+   </size>
+  </property>
+  <property name="dockOptions">
+   <set>QMainWindow::AllowTabbedDocks|QMainWindow::AnimatedDocks</set>
+  </property>
+  <property name="unifiedTitleAndToolBarOnMac">
+   <bool>false</bool>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout_5">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <property name="spacing">
+       <number>5</number>
+      </property>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <property name="sizeConstraint">
+         <enum>QLayout::SetFixedSize</enum>
+        </property>
+        <item>
+         <widget class="QPushButton" name="new_button">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Create new project&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Ctrl+N&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="toolTipDuration">
+           <number>-1</number>
+          </property>
+          <property name="statusTip">
+           <string/>
+          </property>
+          <property name="whatsThis">
+           <string/>
+          </property>
+          <property name="accessibleName">
+           <string/>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">padding:5px 5px 5px 5px;
+</string>
+          </property>
+          <property name="locale">
+           <locale language="English" country="UnitedKingdom"/>
+          </property>
+          <property name="text">
+           <string>New</string>
+          </property>
+          <property name="shortcut">
+           <string>Ctrl+N</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="open_button">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Open existing project&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Ctrl+O&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">padding:5px 5px 5px 5px;</string>
+          </property>
+          <property name="locale">
+           <locale language="English" country="UnitedKingdom"/>
+          </property>
+          <property name="text">
+           <string>Open</string>
+          </property>
+          <property name="shortcut">
+           <string>Ctrl+O</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="save_button">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save current project&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Ctrl+S&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">padding:5px 5px 5px 5px;</string>
+          </property>
+          <property name="locale">
+           <locale language="English" country="UnitedKingdom"/>
+          </property>
+          <property name="text">
+           <string>Save</string>
+          </property>
+          <property name="shortcut">
+           <string>Ctrl+S</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="saveAs_button">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save As current project&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Ctrl+Shift+S&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">padding:5px 5px 5px 5px;</string>
+          </property>
+          <property name="locale">
+           <locale language="English" country="UnitedKingdom"/>
+          </property>
+          <property name="text">
+           <string>Save As</string>
+          </property>
+          <property name="shortcut">
+           <string>Ctrl+Shift+S</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer">
+          <property name="locale">
+           <locale language="English" country="UnitedKingdom"/>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Expanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>13</width>
+            <height>47</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="close_settings_button">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>16</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Close settings&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="accessibleName">
+           <string notr="true"/>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color:white;
+background-color: red</string>
+          </property>
+          <property name="locale">
+           <locale language="English" country="UnitedKingdom"/>
+          </property>
+          <property name="text">
+           <string notr="true">×</string>
+          </property>
+          <property name="shortcut">
+           <string>Ctrl+Shift+S</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="settings_button">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Open settings&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Ctrl+Alt+S&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">padding:5px 5px 5px 5px;</string>
+          </property>
+          <property name="locale">
+           <locale language="English" country="UnitedKingdom"/>
+          </property>
+          <property name="text">
+           <string>Settings</string>
+          </property>
+          <property name="shortcut">
+           <string>Ctrl+Alt+S</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="Line" name="line">
+        <property name="locale">
+         <locale language="English" country="UnitedKingdom"/>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QStackedWidget" name="stackedWidget">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Ignored">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="acceptDrops">
+           <bool>true</bool>
+          </property>
+          <property name="layoutDirection">
+           <enum>Qt::LeftToRight</enum>
+          </property>
+          <property name="autoFillBackground">
+           <bool>false</bool>
+          </property>
+          <property name="locale">
+           <locale language="English" country="UnitedKingdom"/>
+          </property>
+          <property name="currentIndex">
+           <number>1</number>
+          </property>
+          <widget class="QWidget" name="tasks_page">
+           <property name="inputMethodHints">
+            <set>Qt::ImhFormattedNumbersOnly</set>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_4">
+            <item>
+             <widget class="QStackedWidget" name="status_stack">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Maximum">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="layoutDirection">
+               <enum>Qt::LeftToRight</enum>
+              </property>
+              <property name="locale">
+               <locale language="English" country="UnitedKingdom"/>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::NoFrame</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Plain</enum>
+              </property>
+              <property name="lineWidth">
+               <number>0</number>
+              </property>
+              <property name="currentIndex">
+               <number>1</number>
+              </property>
+              <widget class="QWidget" name="converting_page">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_7">
+                <property name="spacing">
+                 <number>3</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>3</number>
+                </property>
+                <item>
+                 <widget class="QLabel" name="convert_status_label_2">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Lucida Console</family>
+                    <pointsize>12</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="layoutDirection">
+                   <enum>Qt::LeftToRight</enum>
+                  </property>
+                  <property name="locale">
+                   <locale language="English" country="UnitedKingdom"/>
+                  </property>
+                  <property name="text">
+                   <string>Converting status</string>
+                  </property>
+                  <property name="margin">
+                   <number>0</number>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="Line" name="line_4">
+                  <property name="locale">
+                   <locale language="English" country="UnitedKingdom"/>
+                  </property>
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <layout class="QGridLayout" name="gridLayout_2">
+                  <item row="0" column="2">
+                   <widget class="QLabel" name="remain_task_label">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Lucida Console</family>
+                      <pointsize>12</pointsize>
+                     </font>
+                    </property>
+                    <property name="layoutDirection">
+                     <enum>Qt::LeftToRight</enum>
+                    </property>
+                    <property name="locale">
+                     <locale language="English" country="UnitedKingdom"/>
+                    </property>
+                    <property name="text">
+                     <string>Remain</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                    <property name="margin">
+                     <number>0</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="2">
+                   <widget class="QLCDNumber" name="remain_tasks_lcd">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>90</width>
+                      <height>35</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>MS UI Gothic</family>
+                      <pointsize>18</pointsize>
+                      <weight>50</weight>
+                      <bold>false</bold>
+                     </font>
+                    </property>
+                    <property name="cursor">
+                     <cursorShape>ArrowCursor</cursorShape>
+                    </property>
+                    <property name="accessibleName">
+                     <string notr="true"/>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(255, 0, 0);</string>
+                    </property>
+                    <property name="locale">
+                     <locale language="English" country="UnitedKingdom"/>
+                    </property>
+                    <property name="frameShape">
+                     <enum>QFrame::Box</enum>
+                    </property>
+                    <property name="segmentStyle">
+                     <enum>QLCDNumber::Flat</enum>
+                    </property>
+                    <property name="intValue" stdset="0">
+                     <number>0</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="3">
+                   <spacer name="horizontalSpacer_8">
+                    <property name="locale">
+                     <locale language="English" country="UnitedKingdom"/>
+                    </property>
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                     <enum>QSizePolicy::Fixed</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>17</width>
+                      <height>27</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item row="1" column="4">
+                   <widget class="QLCDNumber" name="finished_tasks_lcd">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>90</width>
+                      <height>35</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>MS UI Gothic</family>
+                      <pointsize>18</pointsize>
+                      <weight>50</weight>
+                      <bold>false</bold>
+                     </font>
+                    </property>
+                    <property name="cursor">
+                     <cursorShape>ArrowCursor</cursorShape>
+                    </property>
+                    <property name="accessibleName">
+                     <string notr="true"/>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(255, 0, 0);</string>
+                    </property>
+                    <property name="locale">
+                     <locale language="English" country="UnitedKingdom"/>
+                    </property>
+                    <property name="frameShape">
+                     <enum>QFrame::Box</enum>
+                    </property>
+                    <property name="segmentStyle">
+                     <enum>QLCDNumber::Flat</enum>
+                    </property>
+                    <property name="intValue" stdset="0">
+                     <number>0</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLCDNumber" name="current_task_lcd">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>90</width>
+                      <height>35</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>MS UI Gothic</family>
+                      <pointsize>18</pointsize>
+                      <weight>50</weight>
+                      <bold>false</bold>
+                     </font>
+                    </property>
+                    <property name="cursor">
+                     <cursorShape>ArrowCursor</cursorShape>
+                    </property>
+                    <property name="accessibleName">
+                     <string notr="true"/>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(255, 0, 0);</string>
+                    </property>
+                    <property name="locale">
+                     <locale language="English" country="UnitedKingdom"/>
+                    </property>
+                    <property name="frameShape">
+                     <enum>QFrame::Box</enum>
+                    </property>
+                    <property name="segmentStyle">
+                     <enum>QLCDNumber::Flat</enum>
+                    </property>
+                    <property name="intValue" stdset="0">
+                     <number>0</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="5">
+                   <spacer name="horizontalSpacer_3">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item row="1" column="1">
+                   <spacer name="horizontalSpacer_7">
+                    <property name="locale">
+                     <locale language="English" country="UnitedKingdom"/>
+                    </property>
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                     <enum>QSizePolicy::Fixed</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>17</width>
+                      <height>27</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item row="0" column="4">
+                   <widget class="QLabel" name="finished_task_label">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Lucida Console</family>
+                      <pointsize>12</pointsize>
+                     </font>
+                    </property>
+                    <property name="layoutDirection">
+                     <enum>Qt::LeftToRight</enum>
+                    </property>
+                    <property name="locale">
+                     <locale language="English" country="UnitedKingdom"/>
+                    </property>
+                    <property name="text">
+                     <string>Finished</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                    <property name="margin">
+                     <number>0</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="current_task_label">
+                    <property name="font">
+                     <font>
+                      <family>Lucida Console</family>
+                      <pointsize>12</pointsize>
+                     </font>
+                    </property>
+                    <property name="locale">
+                     <locale language="English" country="UnitedKingdom"/>
+                    </property>
+                    <property name="text">
+                     <string>Current</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <widget class="QProgressBar" name="progressBar">
+                  <property name="enabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <pointsize>12</pointsize>
+                    <weight>75</weight>
+                    <italic>false</italic>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true"/>
+                  </property>
+                  <property name="locale">
+                   <locale language="English" country="UnitedKingdom"/>
+                  </property>
+                  <property name="value">
+                   <number>91</number>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="textVisible">
+                   <bool>true</bool>
+                  </property>
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="invertedAppearance">
+                   <bool>false</bool>
+                  </property>
+                  <property name="textDirection">
+                   <enum>QProgressBar::TopToBottom</enum>
+                  </property>
+                  <property name="format">
+                   <string notr="true">current_task</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+              <widget class="QWidget" name="tasks_page">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="contextMenuPolicy">
+                <enum>Qt::NoContextMenu</enum>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_6">
+                <property name="spacing">
+                 <number>3</number>
+                </property>
+                <property name="topMargin">
+                 <number>5</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>3</number>
+                </property>
+                <item>
+                 <widget class="QLabel" name="tasks_status_label">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Lucida Console</family>
+                    <pointsize>12</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                    <kerning>true</kerning>
+                   </font>
+                  </property>
+                  <property name="layoutDirection">
+                   <enum>Qt::LeftToRight</enum>
+                  </property>
+                  <property name="text">
+                   <string>Tasks status</string>
+                  </property>
+                  <property name="margin">
+                   <number>0</number>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="Line" name="line_3">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <layout class="QGridLayout" name="gridLayout">
+                  <property name="sizeConstraint">
+                   <enum>QLayout::SetDefaultConstraint</enum>
+                  </property>
+                  <property name="horizontalSpacing">
+                   <number>5</number>
+                  </property>
+                  <property name="verticalSpacing">
+                   <number>1</number>
+                  </property>
+                  <item row="1" column="0">
+                   <widget class="QLCDNumber" name="active_tasks_lcd">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Maximum" vsizetype="Minimum">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>90</width>
+                      <height>35</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>MS UI Gothic</family>
+                      <pointsize>16</pointsize>
+                      <weight>50</weight>
+                      <bold>false</bold>
+                     </font>
+                    </property>
+                    <property name="accessibleName">
+                     <string notr="true"/>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(255, 0, 0);</string>
+                    </property>
+                    <property name="segmentStyle">
+                     <enum>QLCDNumber::Flat</enum>
+                    </property>
+                    <property name="intValue" stdset="0">
+                     <number>0</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="2">
+                   <widget class="QLCDNumber" name="totally_tasks_lcd">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>90</width>
+                      <height>35</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>MS UI Gothic</family>
+                      <pointsize>18</pointsize>
+                      <weight>50</weight>
+                      <bold>false</bold>
+                     </font>
+                    </property>
+                    <property name="cursor">
+                     <cursorShape>ArrowCursor</cursorShape>
+                    </property>
+                    <property name="accessibleName">
+                     <string notr="true"/>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(255, 0, 0);</string>
+                    </property>
+                    <property name="frameShape">
+                     <enum>QFrame::Box</enum>
+                    </property>
+                    <property name="segmentStyle">
+                     <enum>QLCDNumber::Flat</enum>
+                    </property>
+                    <property name="intValue" stdset="0">
+                     <number>0</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="active_tasks_label">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Lucida Console</family>
+                      <pointsize>12</pointsize>
+                      <kerning>true</kerning>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>Active</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <spacer name="horizontalSpacer_5">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                     <enum>QSizePolicy::Fixed</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>17</width>
+                      <height>27</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item row="0" column="2">
+                   <widget class="QLabel" name="totally_tasks_label">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Lucida Console</family>
+                      <pointsize>12</pointsize>
+                      <kerning>true</kerning>
+                     </font>
+                    </property>
+                    <property name="layoutDirection">
+                     <enum>Qt::LeftToRight</enum>
+                    </property>
+                    <property name="text">
+                     <string>Totally</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                    <property name="margin">
+                     <number>0</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="5">
+                   <spacer name="horizontalSpacer_4">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>438</width>
+                      <height>27</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </widget>
+             </widget>
+            </item>
+            <item>
+             <widget class="GB_TableView" name="tableView">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="contextMenuPolicy">
+               <enum>Qt::DefaultContextMenu</enum>
+              </property>
+              <property name="statusTip">
+               <string/>
+              </property>
+              <property name="layoutDirection">
+               <enum>Qt::LeftToRight</enum>
+              </property>
+              <property name="locale">
+               <locale language="English" country="UnitedKingdom"/>
+              </property>
+              <property name="showGrid">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_5">
+              <item>
+               <widget class="QPushButton" name="moveup_button">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>10</pointsize>
+                 </font>
+                </property>
+                <property name="toolTip">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Move up selected element&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;PageUp&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+                <property name="locale">
+                 <locale language="English" country="UnitedKingdom"/>
+                </property>
+                <property name="text">
+                 <string>˄</string>
+                </property>
+                <property name="shortcut">
+                 <string>PgUp</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="movedown_button">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Fixed" vsizetype="Maximum">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>10</pointsize>
+                 </font>
+                </property>
+                <property name="toolTip">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Move down selected element&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;PageDown&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+                <property name="locale">
+                 <locale language="English" country="UnitedKingdom"/>
+                </property>
+                <property name="text">
+                 <string>˅</string>
+                </property>
+                <property name="shortcut">
+                 <string>PgDown</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_6">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QPushButton" name="add_item_button">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Fixed" vsizetype="Maximum">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>10</pointsize>
+                 </font>
+                </property>
+                <property name="toolTip">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Add task&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Ctrl+I&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+                <property name="locale">
+                 <locale language="English" country="UnitedKingdom"/>
+                </property>
+                <property name="text">
+                 <string>Add</string>
+                </property>
+                <property name="shortcut">
+                 <string>Ctrl+I</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="edit_item_button">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Fixed" vsizetype="Maximum">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>10</pointsize>
+                 </font>
+                </property>
+                <property name="toolTip">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Edit selected task&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Ctrl+E&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+                <property name="locale">
+                 <locale language="English" country="UnitedKingdom"/>
+                </property>
+                <property name="text">
+                 <string>Edit</string>
+                </property>
+                <property name="shortcut">
+                 <string>Ctrl+E</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="delete_item_button">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Fixed" vsizetype="Maximum">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>10</pointsize>
+                 </font>
+                </property>
+                <property name="toolTip">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Delete selected task&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Del&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+                <property name="locale">
+                 <locale language="English" country="UnitedKingdom"/>
+                </property>
+                <property name="text">
+                 <string>Delete</string>
+                </property>
+                <property name="shortcut">
+                 <string>Del</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="deleteall_item_button">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Fixed" vsizetype="Maximum">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>10</pointsize>
+                 </font>
+                </property>
+                <property name="toolTip">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Delete all tasks&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+                <property name="locale">
+                 <locale language="English" country="UnitedKingdom"/>
+                </property>
+                <property name="text">
+                 <string>Delete All</string>
+                </property>
+                <property name="shortcut">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="Line" name="line_6">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout">
+              <item>
+               <widget class="QCheckBox" name="soound_alert_checkBox">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>10</pointsize>
+                 </font>
+                </property>
+                <property name="toolTip">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Sound alert after converting&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+                <property name="locale">
+                 <locale language="English" country="UnitedKingdom"/>
+                </property>
+                <property name="text">
+                 <string>Sound Alert</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="win_notification_checkBox">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>10</pointsize>
+                 </font>
+                </property>
+                <property name="toolTip">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Send Windows notification after converting&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+                <property name="locale">
+                 <locale language="English" country="UnitedKingdom"/>
+                </property>
+                <property name="text">
+                 <string> Windows Notification</string>
+                </property>
+                <property name="tristate">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_10">
+                <property name="locale">
+                 <locale language="English" country="UnitedKingdom"/>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Maximum</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QLabel" name="after_convert_label">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>10</pointsize>
+                 </font>
+                </property>
+                <property name="locale">
+                 <locale language="English" country="UnitedKingdom"/>
+                </property>
+                <property name="text">
+                 <string>After converting:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="after_converting_combobox">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>120</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>10</pointsize>
+                 </font>
+                </property>
+                <property name="layoutDirection">
+                 <enum>Qt::LeftToRight</enum>
+                </property>
+                <property name="locale">
+                 <locale language="English" country="UnitedKingdom"/>
+                </property>
+                <item>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Power Off</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Restart</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_9">
+                <property name="locale">
+                 <locale language="English" country="UnitedKingdom"/>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QPushButton" name="start_button">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>180</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>12</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                  <strikeout>false</strikeout>
+                 </font>
+                </property>
+                <property name="toolTip">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Start converting&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Ctrl+R&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(0, 255, 0);</string>
+                </property>
+                <property name="locale">
+                 <locale language="English" country="UnitedKingdom"/>
+                </property>
+                <property name="text">
+                 <string>Convert</string>
+                </property>
+                <property name="shortcut">
+                 <string>Ctrl+R</string>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="setting_page">
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <item>
+             <widget class="QScrollArea" name="settings_scrollArea">
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
+              <property name="widgetResizable">
+               <bool>true</bool>
+              </property>
+              <widget class="QWidget" name="scrollAreaWidgetContents">
+               <property name="geometry">
+                <rect>
+                 <x>0</x>
+                 <y>0</y>
+                 <width>1027</width>
+                 <height>665</height>
+                </rect>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_8">
+                <item>
+                 <layout class="QFormLayout" name="formLayout">
+                  <property name="labelAlignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="label_2">
+                    <property name="font">
+                     <font>
+                      <pointsize>12</pointsize>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>Language</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <layout class="QHBoxLayout" name="horizontalLayout_8">
+                    <item>
+                     <widget class="QComboBox" name="cb_language">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <pointsize>12</pointsize>
+                       </font>
+                      </property>
+                      <property name="accessibleName">
+                       <string notr="true"/>
+                      </property>
+                      <property name="currentText">
+                       <string notr="true">English</string>
+                      </property>
+                      <property name="currentIndex">
+                       <number>0</number>
+                      </property>
+                      <property name="placeholderText">
+                       <string notr="true"/>
+                      </property>
+                      <item>
+                       <property name="text">
+                        <string>English</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Русский</string>
+                       </property>
+                      </item>
+                     </widget>
+                    </item>
+                    <item>
+                     <spacer name="horizontalSpacer_12">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>40</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="manual_button">
+                      <property name="font">
+                       <font>
+                        <pointsize>11</pointsize>
+                       </font>
+                      </property>
+                      <property name="cursor">
+                       <cursorShape>PointingHandCursor</cursorShape>
+                      </property>
+                      <property name="toolTip">
+                       <string>Do you need help?</string>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">QPushButton { color:rgb(85, 0, 255)}
+
+:hover{
+		color:blue;
+		text-decoration: underline;
+}</string>
+                      </property>
+                      <property name="locale">
+                       <locale language="English" country="UnitedKingdom"/>
+                      </property>
+                      <property name="text">
+                       <string>User Manual</string>
+                      </property>
+                      <property name="flat">
+                       <bool>true</bool>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <spacer name="horizontalSpacer">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeType">
+                       <enum>QSizePolicy::Fixed</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>20</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                   </layout>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QLabel" name="label_3">
+                    <property name="font">
+                     <font>
+                      <pointsize>12</pointsize>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>FFmpeg path</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="1">
+                   <widget class="QInputPath" name="inputpath_ffmpeg" native="true">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="0">
+                   <widget class="QLabel" name="label_6">
+                    <property name="font">
+                     <font>
+                      <pointsize>12</pointsize>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>FFprobe path</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="1">
+                   <widget class="QInputPath" name="inputpath_ffprobe" native="true">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="5" column="0">
+                   <widget class="QLabel" name="label_4">
+                    <property name="font">
+                     <font>
+                      <pointsize>12</pointsize>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>Default export directory</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="5" column="1">
+                   <widget class="QInputPath" name="inputpath_export_dir" native="true"/>
+                  </item>
+                  <item row="6" column="0">
+                   <widget class="QLabel" name="label_7">
+                    <property name="font">
+                     <font>
+                      <pointsize>12</pointsize>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>Sound Alert</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="6" column="1">
+                   <widget class="QInputPath" name="inputpath_sound" native="true"/>
+                  </item>
+                  <item row="7" column="0">
+                   <widget class="QLabel" name="label_5">
+                    <property name="font">
+                     <font>
+                      <pointsize>12</pointsize>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>Default framerate</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="7" column="1">
+                   <widget class="QSpinBox" name="sb_default_framerate">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>60</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <pointsize>12</pointsize>
+                     </font>
+                    </property>
+                    <property name="accessibleName">
+                     <string notr="true"/>
+                    </property>
+                    <property name="minimum">
+                     <number>1</number>
+                    </property>
+                    <property name="maximum">
+                     <number>1000</number>
+                    </property>
+                    <property name="value">
+                     <number>24</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <layout class="QHBoxLayout" name="ffmep_utilities_layout">
+                    <item>
+                     <widget class="QPushButton" name="find_ffmpeg_exe_button">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <pointsize>11</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">padding:5px 15px 5px 15px;
+</string>
+                      </property>
+                      <property name="text">
+                       <string>Find Executable Files</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="dwnld_build_button">
+                      <property name="font">
+                       <font>
+                        <pointsize>11</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">padding:5px 15px 5px 15px;
+
+</string>
+                      </property>
+                      <property name="text">
+                       <string>Download</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <spacer name="horizontalSpacer_14">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeType">
+                       <enum>QSizePolicy::MinimumExpanding</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>40</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                   </layout>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="label_8">
+                    <property name="font">
+                     <font>
+                      <pointsize>12</pointsize>
+                     </font>
+                    </property>
+                    <property name="toolTip">
+                     <string notr="true"/>
+                    </property>
+                    <property name="statusTip">
+                     <string notr="true"/>
+                    </property>
+                    <property name="whatsThis">
+                     <string notr="true"/>
+                    </property>
+                    <property name="text">
+                     <string>FFmpeg</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </widget>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <property name="topMargin">
+       <number>7</number>
+      </property>
+      <item>
+       <widget class="Line" name="line_2">
+        <property name="locale">
+         <locale language="English" country="UnitedKingdom"/>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <property name="spacing">
+         <number>2</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QPushButton" name="author_btn">
+          <property name="font">
+           <font>
+            <pointsize>11</pointsize>
+           </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton { color:rgb(85, 0, 255)}
+
+:hover{
+		color:blue;
+		text-decoration: underline;
+}</string>
+          </property>
+          <property name="locale">
+           <locale language="English" country="UnitedKingdom"/>
+          </property>
+          <property name="text">
+           <string notr="true">By Balakirev Ivan</string>
+          </property>
+          <property name="shortcut">
+           <string notr="true"/>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_2">
+          <property name="locale">
+           <locale language="English" country="UnitedKingdom"/>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="support_button">
+          <property name="font">
+           <font>
+            <pointsize>11</pointsize>
+           </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton { color:rgb(85, 0, 255)}
+
+:hover{
+		color:blue;
+		text-decoration: underline;
+}</string>
+          </property>
+          <property name="locale">
+           <locale language="English" country="UnitedKingdom"/>
+          </property>
+          <property name="text">
+           <string>Support this Project</string>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_11">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="Line" name="line_5">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="version_label">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
+          <property name="statusTip">
+           <string notr="true"/>
+          </property>
+          <property name="whatsThis">
+           <string notr="true"/>
+          </property>
+          <property name="accessibleName">
+           <string notr="true"/>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(182, 182, 182);</string>
+          </property>
+          <property name="text">
+           <string>v 1.0.0</string>
+          </property>
+          <property name="textFormat">
+           <enum>Qt::PlainText</enum>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QInputPath</class>
+   <extends>QWidget</extends>
+   <header>//InputPath/GBInputPath</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>GB_TableView</class>
+   <extends>QTableView</extends>
+   <header>//GB_TableView.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>new_button</tabstop>
+  <tabstop>open_button</tabstop>
+  <tabstop>save_button</tabstop>
+  <tabstop>saveAs_button</tabstop>
+  <tabstop>close_settings_button</tabstop>
+  <tabstop>settings_button</tabstop>
+  <tabstop>tableView</tabstop>
+  <tabstop>moveup_button</tabstop>
+  <tabstop>movedown_button</tabstop>
+  <tabstop>add_item_button</tabstop>
+  <tabstop>edit_item_button</tabstop>
+  <tabstop>delete_item_button</tabstop>
+  <tabstop>deleteall_item_button</tabstop>
+  <tabstop>soound_alert_checkBox</tabstop>
+  <tabstop>win_notification_checkBox</tabstop>
+  <tabstop>after_converting_combobox</tabstop>
+  <tabstop>start_button</tabstop>
+  <tabstop>sb_default_framerate</tabstop>
+  <tabstop>settings_scrollArea</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

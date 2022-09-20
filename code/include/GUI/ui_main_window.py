@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'main_windownSJceQ.ui'
+## Form generated from reading UI file 'main_windowWqrwSw.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -47,9 +47,11 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.new_button.sizePolicy().hasHeightForWidth())
         self.new_button.setSizePolicy(sizePolicy)
         font = QFont()
-        font.setPointSize(10)
+        font.setPointSize(12)
         self.new_button.setFont(font)
         self.new_button.setToolTipDuration(-1)
+        self.new_button.setStyleSheet(u"padding:5px 5px 5px 5px;\n"
+"")
         self.new_button.setLocale(QLocale(QLocale.English, QLocale.UnitedKingdom))
 
         self.verticalLayout.addWidget(self.new_button)
@@ -59,6 +61,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.open_button.sizePolicy().hasHeightForWidth())
         self.open_button.setSizePolicy(sizePolicy)
         self.open_button.setFont(font)
+        self.open_button.setStyleSheet(u"padding:5px 5px 5px 5px;")
         self.open_button.setLocale(QLocale(QLocale.English, QLocale.UnitedKingdom))
 
         self.verticalLayout.addWidget(self.open_button)
@@ -68,6 +71,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.save_button.sizePolicy().hasHeightForWidth())
         self.save_button.setSizePolicy(sizePolicy)
         self.save_button.setFont(font)
+        self.save_button.setStyleSheet(u"padding:5px 5px 5px 5px;")
         self.save_button.setLocale(QLocale(QLocale.English, QLocale.UnitedKingdom))
 
         self.verticalLayout.addWidget(self.save_button)
@@ -77,6 +81,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.saveAs_button.sizePolicy().hasHeightForWidth())
         self.saveAs_button.setSizePolicy(sizePolicy)
         self.saveAs_button.setFont(font)
+        self.saveAs_button.setStyleSheet(u"padding:5px 5px 5px 5px;")
         self.saveAs_button.setLocale(QLocale(QLocale.English, QLocale.UnitedKingdom))
 
         self.verticalLayout.addWidget(self.saveAs_button)
@@ -90,7 +95,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.close_settings_button.sizePolicy().hasHeightForWidth())
         self.close_settings_button.setSizePolicy(sizePolicy)
         font1 = QFont()
-        font1.setPointSize(11)
+        font1.setPointSize(16)
         font1.setBold(True)
         font1.setWeight(75)
         self.close_settings_button.setFont(font1)
@@ -109,6 +114,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.settings_button.sizePolicy().hasHeightForWidth())
         self.settings_button.setSizePolicy(sizePolicy)
         self.settings_button.setFont(font)
+        self.settings_button.setStyleSheet(u"padding:5px 5px 5px 5px;")
         self.settings_button.setLocale(QLocale(QLocale.English, QLocale.UnitedKingdom))
 
         self.verticalLayout.addWidget(self.settings_button)
@@ -478,7 +484,9 @@ class Ui_MainWindow(object):
         sizePolicy10.setHeightForWidth(self.moveup_button.sizePolicy().hasHeightForWidth())
         self.moveup_button.setSizePolicy(sizePolicy10)
         self.moveup_button.setMinimumSize(QSize(0, 0))
-        self.moveup_button.setFont(font)
+        font9 = QFont()
+        font9.setPointSize(10)
+        self.moveup_button.setFont(font9)
         self.moveup_button.setLocale(QLocale(QLocale.English, QLocale.UnitedKingdom))
 
         self.horizontalLayout_5.addWidget(self.moveup_button)
@@ -490,7 +498,7 @@ class Ui_MainWindow(object):
         sizePolicy11.setVerticalStretch(0)
         sizePolicy11.setHeightForWidth(self.movedown_button.sizePolicy().hasHeightForWidth())
         self.movedown_button.setSizePolicy(sizePolicy11)
-        self.movedown_button.setFont(font)
+        self.movedown_button.setFont(font9)
         self.movedown_button.setLocale(QLocale(QLocale.English, QLocale.UnitedKingdom))
 
         self.horizontalLayout_5.addWidget(self.movedown_button)
@@ -503,7 +511,7 @@ class Ui_MainWindow(object):
         self.add_item_button.setObjectName(u"add_item_button")
         sizePolicy11.setHeightForWidth(self.add_item_button.sizePolicy().hasHeightForWidth())
         self.add_item_button.setSizePolicy(sizePolicy11)
-        self.add_item_button.setFont(font)
+        self.add_item_button.setFont(font9)
         self.add_item_button.setLocale(QLocale(QLocale.English, QLocale.UnitedKingdom))
 
         self.horizontalLayout_5.addWidget(self.add_item_button)
@@ -512,7 +520,7 @@ class Ui_MainWindow(object):
         self.edit_item_button.setObjectName(u"edit_item_button")
         sizePolicy11.setHeightForWidth(self.edit_item_button.sizePolicy().hasHeightForWidth())
         self.edit_item_button.setSizePolicy(sizePolicy11)
-        self.edit_item_button.setFont(font)
+        self.edit_item_button.setFont(font9)
         self.edit_item_button.setLocale(QLocale(QLocale.English, QLocale.UnitedKingdom))
 
         self.horizontalLayout_5.addWidget(self.edit_item_button)
@@ -521,7 +529,7 @@ class Ui_MainWindow(object):
         self.delete_item_button.setObjectName(u"delete_item_button")
         sizePolicy11.setHeightForWidth(self.delete_item_button.sizePolicy().hasHeightForWidth())
         self.delete_item_button.setSizePolicy(sizePolicy11)
-        self.delete_item_button.setFont(font)
+        self.delete_item_button.setFont(font9)
         self.delete_item_button.setLocale(QLocale(QLocale.English, QLocale.UnitedKingdom))
 
         self.horizontalLayout_5.addWidget(self.delete_item_button)
@@ -530,7 +538,7 @@ class Ui_MainWindow(object):
         self.deleteall_item_button.setObjectName(u"deleteall_item_button")
         sizePolicy11.setHeightForWidth(self.deleteall_item_button.sizePolicy().hasHeightForWidth())
         self.deleteall_item_button.setSizePolicy(sizePolicy11)
-        self.deleteall_item_button.setFont(font)
+        self.deleteall_item_button.setFont(font9)
         self.deleteall_item_button.setLocale(QLocale(QLocale.English, QLocale.UnitedKingdom))
 
         self.horizontalLayout_5.addWidget(self.deleteall_item_button)
@@ -551,7 +559,7 @@ class Ui_MainWindow(object):
         self.soound_alert_checkBox.setObjectName(u"soound_alert_checkBox")
         sizePolicy10.setHeightForWidth(self.soound_alert_checkBox.sizePolicy().hasHeightForWidth())
         self.soound_alert_checkBox.setSizePolicy(sizePolicy10)
-        self.soound_alert_checkBox.setFont(font)
+        self.soound_alert_checkBox.setFont(font9)
         self.soound_alert_checkBox.setLocale(QLocale(QLocale.English, QLocale.UnitedKingdom))
 
         self.horizontalLayout.addWidget(self.soound_alert_checkBox)
@@ -560,7 +568,7 @@ class Ui_MainWindow(object):
         self.win_notification_checkBox.setObjectName(u"win_notification_checkBox")
         sizePolicy10.setHeightForWidth(self.win_notification_checkBox.sizePolicy().hasHeightForWidth())
         self.win_notification_checkBox.setSizePolicy(sizePolicy10)
-        self.win_notification_checkBox.setFont(font)
+        self.win_notification_checkBox.setFont(font9)
         self.win_notification_checkBox.setLocale(QLocale(QLocale.English, QLocale.UnitedKingdom))
         self.win_notification_checkBox.setTristate(False)
 
@@ -577,7 +585,7 @@ class Ui_MainWindow(object):
         sizePolicy12.setVerticalStretch(0)
         sizePolicy12.setHeightForWidth(self.after_convert_label.sizePolicy().hasHeightForWidth())
         self.after_convert_label.setSizePolicy(sizePolicy12)
-        self.after_convert_label.setFont(font)
+        self.after_convert_label.setFont(font9)
         self.after_convert_label.setLocale(QLocale(QLocale.English, QLocale.UnitedKingdom))
 
         self.horizontalLayout.addWidget(self.after_convert_label)
@@ -590,7 +598,7 @@ class Ui_MainWindow(object):
         sizePolicy10.setHeightForWidth(self.after_converting_combobox.sizePolicy().hasHeightForWidth())
         self.after_converting_combobox.setSizePolicy(sizePolicy10)
         self.after_converting_combobox.setMinimumSize(QSize(120, 0))
-        self.after_converting_combobox.setFont(font)
+        self.after_converting_combobox.setFont(font9)
         self.after_converting_combobox.setLayoutDirection(Qt.LeftToRight)
         self.after_converting_combobox.setLocale(QLocale(QLocale.English, QLocale.UnitedKingdom))
 
@@ -605,12 +613,12 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.start_button.sizePolicy().hasHeightForWidth())
         self.start_button.setSizePolicy(sizePolicy)
         self.start_button.setMinimumSize(QSize(180, 30))
-        font9 = QFont()
-        font9.setPointSize(12)
-        font9.setBold(True)
-        font9.setWeight(75)
-        font9.setStrikeOut(False)
-        self.start_button.setFont(font9)
+        font10 = QFont()
+        font10.setPointSize(12)
+        font10.setBold(True)
+        font10.setWeight(75)
+        font10.setStrikeOut(False)
+        self.start_button.setFont(font10)
         self.start_button.setStyleSheet(u"background-color: rgb(0, 255, 0);")
         self.start_button.setLocale(QLocale(QLocale.English, QLocale.UnitedKingdom))
         self.start_button.setFlat(False)
@@ -639,83 +647,9 @@ class Ui_MainWindow(object):
         self.formLayout.setLabelAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
         self.label_2 = QLabel(self.scrollAreaWidgetContents)
         self.label_2.setObjectName(u"label_2")
-        font10 = QFont()
-        font10.setPointSize(11)
-        self.label_2.setFont(font10)
+        self.label_2.setFont(font)
 
         self.formLayout.setWidget(0, QFormLayout.LabelRole, self.label_2)
-
-        self.label_3 = QLabel(self.scrollAreaWidgetContents)
-        self.label_3.setObjectName(u"label_3")
-        self.label_3.setFont(font10)
-
-        self.formLayout.setWidget(1, QFormLayout.LabelRole, self.label_3)
-
-        self.inputpath_ffmpeg = QInputPath(self.scrollAreaWidgetContents)
-        self.inputpath_ffmpeg.setObjectName(u"inputpath_ffmpeg")
-        sizePolicy13 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
-        sizePolicy13.setHorizontalStretch(0)
-        sizePolicy13.setVerticalStretch(0)
-        sizePolicy13.setHeightForWidth(self.inputpath_ffmpeg.sizePolicy().hasHeightForWidth())
-        self.inputpath_ffmpeg.setSizePolicy(sizePolicy13)
-
-        self.formLayout.setWidget(1, QFormLayout.FieldRole, self.inputpath_ffmpeg)
-
-        self.label_6 = QLabel(self.scrollAreaWidgetContents)
-        self.label_6.setObjectName(u"label_6")
-        self.label_6.setFont(font10)
-
-        self.formLayout.setWidget(2, QFormLayout.LabelRole, self.label_6)
-
-        self.inputpath_ffprobe = QInputPath(self.scrollAreaWidgetContents)
-        self.inputpath_ffprobe.setObjectName(u"inputpath_ffprobe")
-        sizePolicy13.setHeightForWidth(self.inputpath_ffprobe.sizePolicy().hasHeightForWidth())
-        self.inputpath_ffprobe.setSizePolicy(sizePolicy13)
-
-        self.formLayout.setWidget(2, QFormLayout.FieldRole, self.inputpath_ffprobe)
-
-        self.label_4 = QLabel(self.scrollAreaWidgetContents)
-        self.label_4.setObjectName(u"label_4")
-        self.label_4.setFont(font10)
-
-        self.formLayout.setWidget(3, QFormLayout.LabelRole, self.label_4)
-
-        self.inputpath_export_dir = QInputPath(self.scrollAreaWidgetContents)
-        self.inputpath_export_dir.setObjectName(u"inputpath_export_dir")
-
-        self.formLayout.setWidget(3, QFormLayout.FieldRole, self.inputpath_export_dir)
-
-        self.label_7 = QLabel(self.scrollAreaWidgetContents)
-        self.label_7.setObjectName(u"label_7")
-        self.label_7.setFont(font10)
-
-        self.formLayout.setWidget(4, QFormLayout.LabelRole, self.label_7)
-
-        self.inputpath_sound = QInputPath(self.scrollAreaWidgetContents)
-        self.inputpath_sound.setObjectName(u"inputpath_sound")
-
-        self.formLayout.setWidget(4, QFormLayout.FieldRole, self.inputpath_sound)
-
-        self.label_5 = QLabel(self.scrollAreaWidgetContents)
-        self.label_5.setObjectName(u"label_5")
-        self.label_5.setFont(font10)
-
-        self.formLayout.setWidget(5, QFormLayout.LabelRole, self.label_5)
-
-        self.sb_default_framerate = QSpinBox(self.scrollAreaWidgetContents)
-        self.sb_default_framerate.setObjectName(u"sb_default_framerate")
-        sizePolicy10.setHeightForWidth(self.sb_default_framerate.sizePolicy().hasHeightForWidth())
-        self.sb_default_framerate.setSizePolicy(sizePolicy10)
-        self.sb_default_framerate.setMinimumSize(QSize(60, 0))
-        self.sb_default_framerate.setFont(font10)
-#if QT_CONFIG(accessibility)
-        self.sb_default_framerate.setAccessibleName(u"")
-#endif // QT_CONFIG(accessibility)
-        self.sb_default_framerate.setMinimum(1)
-        self.sb_default_framerate.setMaximum(1000)
-        self.sb_default_framerate.setValue(24)
-
-        self.formLayout.setWidget(5, QFormLayout.FieldRole, self.sb_default_framerate)
 
         self.horizontalLayout_8 = QHBoxLayout()
         self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
@@ -725,7 +659,7 @@ class Ui_MainWindow(object):
         self.cb_language.setObjectName(u"cb_language")
         sizePolicy10.setHeightForWidth(self.cb_language.sizePolicy().hasHeightForWidth())
         self.cb_language.setSizePolicy(sizePolicy10)
-        self.cb_language.setFont(font10)
+        self.cb_language.setFont(font)
 #if QT_CONFIG(accessibility)
         self.cb_language.setAccessibleName(u"")
 #endif // QT_CONFIG(accessibility)
@@ -740,7 +674,9 @@ class Ui_MainWindow(object):
 
         self.manual_button = QPushButton(self.scrollAreaWidgetContents)
         self.manual_button.setObjectName(u"manual_button")
-        self.manual_button.setFont(font10)
+        font11 = QFont()
+        font11.setPointSize(11)
+        self.manual_button.setFont(font11)
         self.manual_button.setCursor(QCursor(Qt.PointingHandCursor))
         self.manual_button.setStyleSheet(u"QPushButton { color:rgb(85, 0, 255)}\n"
 "\n"
@@ -759,6 +695,121 @@ class Ui_MainWindow(object):
 
 
         self.formLayout.setLayout(0, QFormLayout.FieldRole, self.horizontalLayout_8)
+
+        self.label_3 = QLabel(self.scrollAreaWidgetContents)
+        self.label_3.setObjectName(u"label_3")
+        self.label_3.setFont(font)
+
+        self.formLayout.setWidget(2, QFormLayout.LabelRole, self.label_3)
+
+        self.inputpath_ffmpeg = QInputPath(self.scrollAreaWidgetContents)
+        self.inputpath_ffmpeg.setObjectName(u"inputpath_ffmpeg")
+        sizePolicy13 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
+        sizePolicy13.setHorizontalStretch(0)
+        sizePolicy13.setVerticalStretch(0)
+        sizePolicy13.setHeightForWidth(self.inputpath_ffmpeg.sizePolicy().hasHeightForWidth())
+        self.inputpath_ffmpeg.setSizePolicy(sizePolicy13)
+
+        self.formLayout.setWidget(2, QFormLayout.FieldRole, self.inputpath_ffmpeg)
+
+        self.label_6 = QLabel(self.scrollAreaWidgetContents)
+        self.label_6.setObjectName(u"label_6")
+        self.label_6.setFont(font)
+
+        self.formLayout.setWidget(3, QFormLayout.LabelRole, self.label_6)
+
+        self.inputpath_ffprobe = QInputPath(self.scrollAreaWidgetContents)
+        self.inputpath_ffprobe.setObjectName(u"inputpath_ffprobe")
+        sizePolicy13.setHeightForWidth(self.inputpath_ffprobe.sizePolicy().hasHeightForWidth())
+        self.inputpath_ffprobe.setSizePolicy(sizePolicy13)
+
+        self.formLayout.setWidget(3, QFormLayout.FieldRole, self.inputpath_ffprobe)
+
+        self.label_4 = QLabel(self.scrollAreaWidgetContents)
+        self.label_4.setObjectName(u"label_4")
+        self.label_4.setFont(font)
+
+        self.formLayout.setWidget(5, QFormLayout.LabelRole, self.label_4)
+
+        self.inputpath_export_dir = QInputPath(self.scrollAreaWidgetContents)
+        self.inputpath_export_dir.setObjectName(u"inputpath_export_dir")
+
+        self.formLayout.setWidget(5, QFormLayout.FieldRole, self.inputpath_export_dir)
+
+        self.label_7 = QLabel(self.scrollAreaWidgetContents)
+        self.label_7.setObjectName(u"label_7")
+        self.label_7.setFont(font)
+
+        self.formLayout.setWidget(6, QFormLayout.LabelRole, self.label_7)
+
+        self.inputpath_sound = QInputPath(self.scrollAreaWidgetContents)
+        self.inputpath_sound.setObjectName(u"inputpath_sound")
+
+        self.formLayout.setWidget(6, QFormLayout.FieldRole, self.inputpath_sound)
+
+        self.label_5 = QLabel(self.scrollAreaWidgetContents)
+        self.label_5.setObjectName(u"label_5")
+        self.label_5.setFont(font)
+
+        self.formLayout.setWidget(7, QFormLayout.LabelRole, self.label_5)
+
+        self.sb_default_framerate = QSpinBox(self.scrollAreaWidgetContents)
+        self.sb_default_framerate.setObjectName(u"sb_default_framerate")
+        sizePolicy10.setHeightForWidth(self.sb_default_framerate.sizePolicy().hasHeightForWidth())
+        self.sb_default_framerate.setSizePolicy(sizePolicy10)
+        self.sb_default_framerate.setMinimumSize(QSize(60, 0))
+        self.sb_default_framerate.setFont(font)
+#if QT_CONFIG(accessibility)
+        self.sb_default_framerate.setAccessibleName(u"")
+#endif // QT_CONFIG(accessibility)
+        self.sb_default_framerate.setMinimum(1)
+        self.sb_default_framerate.setMaximum(1000)
+        self.sb_default_framerate.setValue(24)
+
+        self.formLayout.setWidget(7, QFormLayout.FieldRole, self.sb_default_framerate)
+
+        self.ffmep_utilities_layout = QHBoxLayout()
+        self.ffmep_utilities_layout.setObjectName(u"ffmep_utilities_layout")
+        self.find_ffmpeg_exe_button = QPushButton(self.scrollAreaWidgetContents)
+        self.find_ffmpeg_exe_button.setObjectName(u"find_ffmpeg_exe_button")
+        sizePolicy.setHeightForWidth(self.find_ffmpeg_exe_button.sizePolicy().hasHeightForWidth())
+        self.find_ffmpeg_exe_button.setSizePolicy(sizePolicy)
+        self.find_ffmpeg_exe_button.setFont(font11)
+        self.find_ffmpeg_exe_button.setStyleSheet(u"padding:5px 15px 5px 15px;\n"
+"")
+
+        self.ffmep_utilities_layout.addWidget(self.find_ffmpeg_exe_button)
+
+        self.dwnld_build_button = QPushButton(self.scrollAreaWidgetContents)
+        self.dwnld_build_button.setObjectName(u"dwnld_build_button")
+        self.dwnld_build_button.setFont(font11)
+        self.dwnld_build_button.setStyleSheet(u"padding:5px 15px 5px 15px;\n"
+"\n"
+"")
+
+        self.ffmep_utilities_layout.addWidget(self.dwnld_build_button)
+
+        self.horizontalSpacer_14 = QSpacerItem(40, 20, QSizePolicy.MinimumExpanding, QSizePolicy.Minimum)
+
+        self.ffmep_utilities_layout.addItem(self.horizontalSpacer_14)
+
+
+        self.formLayout.setLayout(1, QFormLayout.FieldRole, self.ffmep_utilities_layout)
+
+        self.label_8 = QLabel(self.scrollAreaWidgetContents)
+        self.label_8.setObjectName(u"label_8")
+        self.label_8.setFont(font)
+#if QT_CONFIG(tooltip)
+        self.label_8.setToolTip(u"")
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(statustip)
+        self.label_8.setStatusTip(u"")
+#endif // QT_CONFIG(statustip)
+#if QT_CONFIG(whatsthis)
+        self.label_8.setWhatsThis(u"")
+#endif // QT_CONFIG(whatsthis)
+
+        self.formLayout.setWidget(1, QFormLayout.LabelRole, self.label_8)
 
 
         self.verticalLayout_8.addLayout(self.formLayout)
@@ -794,7 +845,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3.setContentsMargins(-1, 0, -1, -1)
         self.author_btn = QPushButton(self.centralwidget)
         self.author_btn.setObjectName(u"author_btn")
-        self.author_btn.setFont(font)
+        self.author_btn.setFont(font11)
         self.author_btn.setCursor(QCursor(Qt.PointingHandCursor))
         self.author_btn.setStyleSheet(u"QPushButton { color:rgb(85, 0, 255)}\n"
 "\n"
@@ -817,7 +868,7 @@ class Ui_MainWindow(object):
 
         self.support_button = QPushButton(self.centralwidget)
         self.support_button.setObjectName(u"support_button")
-        self.support_button.setFont(font10)
+        self.support_button.setFont(font11)
         self.support_button.setCursor(QCursor(Qt.PointingHandCursor))
         self.support_button.setStyleSheet(u"QPushButton { color:rgb(85, 0, 255)}\n"
 "\n"
@@ -843,7 +894,7 @@ class Ui_MainWindow(object):
 
         self.version_label = QLabel(self.centralwidget)
         self.version_label.setObjectName(u"version_label")
-        self.version_label.setFont(font)
+        self.version_label.setFont(font9)
 #if QT_CONFIG(tooltip)
         self.version_label.setToolTip(u"")
 #endif // QT_CONFIG(tooltip)
@@ -1022,11 +1073,6 @@ class Ui_MainWindow(object):
         self.start_button.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+R", None))
 #endif // QT_CONFIG(shortcut)
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"Language", None))
-        self.label_3.setText(QCoreApplication.translate("MainWindow", u"FFmpeg path", None))
-        self.label_6.setText(QCoreApplication.translate("MainWindow", u"FFprobe path", None))
-        self.label_4.setText(QCoreApplication.translate("MainWindow", u"Default export directory", None))
-        self.label_7.setText(QCoreApplication.translate("MainWindow", u"Sound Alert", None))
-        self.label_5.setText(QCoreApplication.translate("MainWindow", u"Default framerate", None))
         self.cb_language.setItemText(0, QCoreApplication.translate("MainWindow", u"English", None))
         self.cb_language.setItemText(1, QCoreApplication.translate("MainWindow", u"\u0420\u0443\u0441\u0441\u043a\u0438\u0439", None))
 
@@ -1034,6 +1080,14 @@ class Ui_MainWindow(object):
         self.manual_button.setToolTip(QCoreApplication.translate("MainWindow", u"Do you need help?", None))
 #endif // QT_CONFIG(tooltip)
         self.manual_button.setText(QCoreApplication.translate("MainWindow", u"User Manual", None))
+        self.label_3.setText(QCoreApplication.translate("MainWindow", u"FFmpeg path", None))
+        self.label_6.setText(QCoreApplication.translate("MainWindow", u"FFprobe path", None))
+        self.label_4.setText(QCoreApplication.translate("MainWindow", u"Default export directory", None))
+        self.label_7.setText(QCoreApplication.translate("MainWindow", u"Sound Alert", None))
+        self.label_5.setText(QCoreApplication.translate("MainWindow", u"Default framerate", None))
+        self.find_ffmpeg_exe_button.setText(QCoreApplication.translate("MainWindow", u"Find Executable Files", None))
+        self.dwnld_build_button.setText(QCoreApplication.translate("MainWindow", u"Download", None))
+        self.label_8.setText(QCoreApplication.translate("MainWindow", u"FFmpeg", None))
         self.support_button.setText(QCoreApplication.translate("MainWindow", u"Support this Project", None))
         self.version_label.setText(QCoreApplication.translate("MainWindow", u"v 1.0.0", None))
     # retranslateUi

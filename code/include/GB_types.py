@@ -18,7 +18,7 @@ class SettingsData:
     def_framerate:int = 24
 
 @dataclass
-class MediaFileData:
+class MediaFileParameters:
     """ Class describes data structure of media file information"""
     framerate:int = 0
     width: int = 0
@@ -40,7 +40,7 @@ class FilterOptions:
 @dataclass
 class ImportedMediaData:
     """ Class describes data structure of imported media video or image sequence"""
-    media_file_par:MediaFileData = MediaFileData()
+    media_file_par:MediaFileParameters = MediaFileParameters()
     start_frame:int = 1
     end_frame: int = 1
     videofile_path:str = ""

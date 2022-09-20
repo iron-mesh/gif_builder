@@ -107,7 +107,7 @@ class GBDialogEditTask(QDialog):
 
     @Slot()
     def _on_path_changed(self) -> None:
-        mfp:MediaFileData = self._ui.isfp_import_media.get_data().media_file_par
+        mfp:MediaFileParameters = self._ui.isfp_import_media.get_data().media_file_par
         if ( mfp.type == MediaType.VIDEO):
             self._ui.sb_framerate.setValue(mfp.framerate)
 

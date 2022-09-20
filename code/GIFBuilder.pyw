@@ -5,6 +5,7 @@
 import logging
 import pickle, os, copy, winsound, importlib
 import re
+import sys
 
 import include.GB_constants as GBC
 
@@ -58,6 +59,7 @@ class GIFBuilder (QMainWindow):
         self.ui.movedown_button.clicked.connect(lambda :self._on_move_row(direction='D'))
         self.ui.start_button.clicked.connect(self._on_start_button)
         self.ui.manual_button.clicked.connect(self._on_open_manual)
+        self.ui.dwnld_build_button.clicked.connect(self._on_download_btn)
         # other initialization
         self.load_settings()
         self._projfile_path:str = ""
@@ -65,6 +67,8 @@ class GIFBuilder (QMainWindow):
         icon = QIcon()
         icon.addFile("./resources/icon.png", QSize(), QIcon.Normal, QIcon.Off)
         self.setWindowIcon(icon)
+        if(sys.platform != "win32"):
+            self.ui.dwnld_build_button.setVisible(False)
         # data model and Tableview presentation initialization
         self.ui.tableView.edit_task_clicked.connect(self._on_edit_item)
         self.ui.tableView.duplicate_task_clicked.connect(self._on_dupli_task)
@@ -113,7 +117,7 @@ class GIFBuilder (QMainWindow):
     def _lang_changed(self,index:int):
         if index == 1:
             self._translator.load("./resources/cgifbuilder_en-ru.qm")
-            self._translatorQt.load("./resources//qtbase_ru.qm")
+            self._translatorQt.load("./resources/qtbase_ru.qm")
             app.installTranslator(self._translator)
             app.installTranslator(self._translatorQt)
         elif index == 0:
@@ -127,7 +131,7 @@ class GIFBuilder (QMainWindow):
         file_list:list = os.listdir("./resources")
         cur_lang:str = self.ui.cb_language.currentText()
         manual_url:str = ""
-        regex = re.compile(r".*" + cur_lang + r"\.pdf", re.I)
+        regex = re.compile(r".*" + cur_lang + r"\.pdf", re.IGNORECASE)
         for f in file_list:
             if regex.search(f):
                 manual_url = os.path.abspath(r"./resources") + f"/{f}"
@@ -192,7 +196,7 @@ class GIFBuilder (QMainWindow):
         dialog._ui.btn_add.clicked.connect(add_row)
         dialog._ui.buttonBox.hide()
         if(self.settings.exp_dir):
-            dialog._ui.ip_export_file.set_path(f"{self.settings.exp_dir}/untitled.gif")
+            dialog._ui.ip_export_file.set_path(os.path.join(self.settings.exp_dir,"untitled.gif"))
         res = dialog.exec_()
         if(res == QDialog.Accepted):
             add_row()
@@ -333,6 +337,24 @@ class GIFBuilder (QMainWindow):
         url = QUrl(URL_AUTHOR_PAGE)
         if not QDesktopServices.openUrl(url):
             QMessageBox.warning(self, GBC.LC_WARNING, GBC.LC_MSG_URLOPENERROR + url.path())
+
+    @Slot()
+    def _on_download_btn(self):
+        logging.debug("download")
+        def open_url(link):
+            def handler():
+                url = QUrl(link)
+                if not QDesktopServices.openUrl(url):
+                    QMessageBox.warning(self, GBC.LC_WARNING, GBC.LC_MSG_URLOPENERROR + url.path())
+            return handler
+
+        dwnld_context_menu = QMenu(self)
+        dwnld_context_menu.setStyleSheet("font-size:16px")
+        links = GBC.WIN_DOWNLOAD_BUILDS_URL
+        for i, l in enumerate(links):
+            if "ffmpeg.org" in l['url']: dwnld_context_menu.addSeparator()
+            dwnld_context_menu.addAction(l['title']).triggered.connect(open_url(l['url']))
+        dwnld_context_menu.popup(QCursor.pos())
 
 
     @check_workingstate
