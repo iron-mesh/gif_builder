@@ -1,4 +1,5 @@
 import json
+import re
 import subprocess, os, logging
 
 
@@ -67,8 +68,6 @@ def check_ffprobe(f):
 
 def check_exefile(path:str, match_str:str)->bool:
     if not os.path.exists(path): return False
-
-
     try:
         startupinfo = subprocess.STARTUPINFO()
         startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
@@ -80,14 +79,27 @@ def check_exefile(path:str, match_str:str)->bool:
     else:
         return True
 
+def find_ffmpeg_files(dir:str)->dict:
+    re_ffmpeg = re.compile(r"^.*ffmpeg.*exe$", flags=re.IGNORECASE)
+    re_ffprobe = re.compile(r"^.*ffprobe.*exe$", flags=re.IGNORECASE)
+    result = {"ffprobe":"", "ffmpeg":""}
+    for dir_name, subdir_names, file_names in os.walk(dir):
+
+        for f_name in file_names:
+            if (re_ffmpeg.search(f_name)):
+                path = os.path.join(dir_name, f_name)
+                if check_exefile(path, "ffmpeg"):
+                    result["ffmpeg"] = path
+
+            if (re_ffprobe.search(f_name)):
+                path = os.path.join(dir_name, f_name)
+                if check_exefile(path, "ffprobe"):
+                    result["ffprobe"] = path
+    return result
+
 
 
 
 if __name__ == "__main__":
-    print("______get_media_parameters test _____")
-    video_path = r"D:\MAIN\Art\Commercial Projects\25-03-22 Crypto Storage Case 3 (staff)\Export\animation\ ut  white -0001-0410.mp4"
-    ffprobe_path = r"D:\Soft\ffmpeg-N-104359-g9b445663a5-win64-lgpl\bin\ffprobe.exe"
-    ffmpeg_path = r"D:\Soft\ffmpeg-N-104359-g9b445663a5-win64-lgpl\bin\ffmpeg.exe"
-    res = get_media_parameters(ffprobe_path, video_path, MediaType.VIDEO)
-    print(res)
-    print(f"{check_exefile.__name__} checking: {check_exefile(ffmpeg_path, 'ffmpeg')}")
+    pass
+

@@ -5,7 +5,7 @@ from PySide2.QtCore import QCoreApplication
 LOGGING_DISABLED = False
 
 VERSION = "1.2.0a"
-COMPATIBLE_VERSION_LIST = ["1.0.0", "1.1.0"]
+COMPATIBLE_VERSION_LIST = ["1.1.0", "1.2.0a","1.2.0"]
 
 WIN_DOWNLOAD_BUILDS_URL = [{'title':QCoreApplication.translate("interface", "Windows builds by BtbN"), 'url':"https://github.com/BtbN/FFmpeg-Builds/releases" },
                            {'title':QCoreApplication.translate("interface", "Windows builds from gyan.dev"), 'url':"https://www.gyan.dev/ffmpeg/builds/" },{'title':QCoreApplication.translate("interface", "Open the Official Site"), 'url':"https://ffmpeg.org/download.html" }]
@@ -17,11 +17,6 @@ class Modes (enum.IntEnum):
     EXEFILE = 2
     SAVE_IMAGE = 3
     SOUND = 4
-
-
-class MediaType(enum.IntEnum):
-    VIDEO = 0
-    IMAGE = 1
 
 @enum.unique
 class WorkingState (enum.IntEnum):
@@ -86,6 +81,7 @@ LC_TWQM_SOURCEDIR = QCoreApplication.translate("interface", "Source Directory")
 LC_TWQM_DEACTIVATEALL = QCoreApplication.translate("interface", "Deactivate All")
 LC_TWQM_ACTIVATEALL = QCoreApplication.translate("interface", "Activate All")
 LC_TWQM_ACTIVITY = QCoreApplication.translate("interface", "Activity")
+LC_DIAL_SELECT_ACTION = QCoreApplication.translate("interface", "Select Action")
 
 #translatable stings of tableview header
 
@@ -108,3 +104,4 @@ LC_MSG_EXIT_SAVE_QUESTION = QCoreApplication.translate("messages", "Do you want 
 LC_MSG_FFMPEG_PATH_NOT_CORRECT = QCoreApplication.translate("messages", "FFmpeg path is not correct or undefined!")
 LC_MSG_FFPROBE_PATH_NOT_CORRECT = QCoreApplication.translate("messages", "FFprobe path is not correct or undefined!")
 LC_MSG_SOUND_ISNT_SELECTED = QCoreApplication.translate("messages", "Sound file isn't selected. Go to Setting to select it.")
+LC_MSG_SELECT_DIR_FFMPEG_SEARCH = QCoreApplication.translate("messages", "All or some files haven't  been found in the system. Do you want to choose a folder to search?")

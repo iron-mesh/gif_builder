@@ -21,7 +21,7 @@ class TaskHandler(QThread):
         super(TaskHandler, self).__init__(parent)
         self._parent = parent
         self._temperal_dir:str = ""
-        self.running:bool = True
+        self.is_running:bool = True
         self._paused: bool = False
         self._palette_path: str = ""
 
@@ -43,7 +43,7 @@ class TaskHandler(QThread):
         for row in range(model.rowCount()):
             while(self._paused):
                 pass
-            if not self.running: break
+            if not self.is_running: break
             if (model.item(row, 0).checkState() == Qt.Unchecked): continue
             response.model_row = row
             response.current += 1
@@ -88,7 +88,7 @@ class TaskHandler(QThread):
 
 
     def _get_imgseq_mask(self, row:int)->tuple:
-        """Return tuple: (<image mask for ffmpeg>, <index of first image>),
+        """Returns tuple: (<image mask for ffmpeg>, <index of first image>),
         if error is occured return None"""
         model: QStandardItemModel = self._parent._task_list_model
         imglist:list = model.item(row, 1).data(role = Qt.UserRole).imgseq_pathes

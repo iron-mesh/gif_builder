@@ -6,10 +6,11 @@ import logging
 import pickle, os, copy, winsound, importlib
 import re
 import sys
+from include.ImportedMediaContainer import ImportedMediaContainer
 
 import include.GB_constants as GBC
 
-# from PySide2.QtCore import *
+from PySide2.QtCore import *
 from PySide2 import QtWidgets
 
 import include.GBDialogEditTask as GBDET
@@ -60,6 +61,7 @@ class GIFBuilder (QMainWindow):
         self.ui.start_button.clicked.connect(self._on_start_button)
         self.ui.manual_button.clicked.connect(self._on_open_manual)
         self.ui.dwnld_build_button.clicked.connect(self._on_download_btn)
+        self.ui.find_ffmpeg_exe_button.clicked.connect(self.on_find_ffmpeg_files)
         # other initialization
         self.load_settings()
         self._projfile_path:str = ""
@@ -389,12 +391,11 @@ class GIFBuilder (QMainWindow):
             self.ui.tableView.setEnabled(False)
             self.ui.tableView.clearSelection()
             self._working_state = WorkingState.PROCESSING
-            self._task_handler.running = True
-            self._task_handler.start(priority=QThread.LowPriority)
-            # self._task_handler.run()
+            self._task_handler.is_running = True
+            self._task_handler.start(priority=QThread.NormalPriority)
         elif (self._working_state == WorkingState.PROCESSING):
             logging.debug("stop thread")
-            self._task_handler.running = False
+            self._task_handler.is_running = False
         elif (self._working_state == WorkingState.PROCESSING_FINISHED):
             self.ui.start_button.setText(GBC.LC_CONVERT)
             self.ui.start_button.setStyleSheet("background-color: rgb(0, 255, 0); color: rgb(0, 0, 0)")
@@ -512,6 +513,37 @@ class GIFBuilder (QMainWindow):
         model = self._task_list_model
         for row in range(model.rowCount()):
             model.item(row, 0).setCheckState(Qt.Checked if status else Qt.Unchecked)
+
+    @Slot()
+    def on_find_ffmpeg_files(self):
+        search_res:dict = {}
+        ffmpeg_path:str = ""
+        ffprobe_path: str = ""
+        for stage in range(1,3):
+            dir_pathes = []
+            if stage == 1:
+                dir_pathes = os.environ["PATH"].split(';')
+            elif stage == 2:
+                dir_pathes.append(QFileDialog.getExistingDirectory(self, GBC.LC_SELECT_DIR_TITLE, "/", QFileDialog.ShowDirsOnly))
+
+            for path in dir_pathes:
+                if (stage == 1) and ("ffmpeg" not in path): continue
+                search_res = find_ffmpeg_files(path)
+                ffmpeg_path = search_res["ffmpeg"] if search_res["ffmpeg"] else ffmpeg_path
+                ffprobe_path = search_res["ffprobe"] if search_res["ffprobe"] else ffprobe_path
+
+            if ffmpeg_path:
+                self.ui.inputpath_ffmpeg.set_path(ffmpeg_path)
+            if ffprobe_path:
+                self.ui.inputpath_ffprobe.set_path(ffprobe_path)
+
+            if (stage == 1) and (not ffmpeg_path or not ffprobe_path):
+                dialog_res = QMessageBox.question(self, GBC.LC_DIAL_SELECT_ACTION, GBC.LC_MSG_SELECT_DIR_FFMPEG_SEARCH, QMessageBox.StandardButtons(QMessageBox.StandardButton.Yes|QMessageBox.StandardButton.No))
+                logging.debug(dialog_res)
+                if dialog_res == QMessageBox.StandardButton.No:
+                    break
+            else:
+                break
 
 
 

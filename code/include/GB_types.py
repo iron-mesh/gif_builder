@@ -1,11 +1,16 @@
-import dataclasses
+import dataclasses, enum
 import logging
 from dataclasses import dataclass
 
-from .GB_constants import MediaType
+
 
 logging.basicConfig(level=logging.DEBUG)
 #logging.disable(logging.CRITICAL)
+
+@enum.unique
+class MediaType(enum.IntEnum):
+    VIDEO = 0
+    IMAGE = 1
 
 @dataclass
 class SettingsData:

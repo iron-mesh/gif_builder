@@ -1634,12 +1634,15 @@ background-color: red</string>
                         <pointsize>11</pointsize>
                        </font>
                       </property>
+                      <property name="toolTip">
+                       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Try to find FFmpeg files&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                      </property>
                       <property name="styleSheet">
                        <string notr="true">padding:5px 15px 5px 15px;
 </string>
                       </property>
                       <property name="text">
-                       <string>Find Executable Files</string>
+                       <string>Find FFmpeg Files</string>
                       </property>
                      </widget>
                     </item>
@@ -1649,6 +1652,9 @@ background-color: red</string>
                        <font>
                         <pointsize>11</pointsize>
                        </font>
+                      </property>
+                      <property name="toolTip">
+                       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select a link to website to download FFmpeg builds &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                       </property>
                       <property name="styleSheet">
                        <string notr="true">padding:5px 15px 5px 15px;
@@ -1779,6 +1785,51 @@ background-color: red</string>
           <property name="sizeHint" stdset="0">
            <size>
             <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="feedback_button">
+          <property name="font">
+           <font>
+            <pointsize>11</pointsize>
+           </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton { color:rgb(85, 0, 255)}
+
+:hover{
+		color:blue;
+		text-decoration: underline;
+}</string>
+          </property>
+          <property name="locale">
+           <locale language="English" country="UnitedKingdom"/>
+          </property>
+          <property name="text">
+           <string>Send Feedback</string>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_13">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>30</width>
             <height>20</height>
            </size>
           </property>

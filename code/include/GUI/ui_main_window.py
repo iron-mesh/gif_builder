@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'main_windowWqrwSw.ui'
+## Form generated from reading UI file 'main_windowOpAgkT.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -866,6 +866,25 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_3.addItem(self.horizontalSpacer_2)
 
+        self.feedback_button = QPushButton(self.centralwidget)
+        self.feedback_button.setObjectName(u"feedback_button")
+        self.feedback_button.setFont(font11)
+        self.feedback_button.setCursor(QCursor(Qt.PointingHandCursor))
+        self.feedback_button.setStyleSheet(u"QPushButton { color:rgb(85, 0, 255)}\n"
+"\n"
+":hover{\n"
+"		color:blue;\n"
+"		text-decoration: underline;\n"
+"}")
+        self.feedback_button.setLocale(QLocale(QLocale.English, QLocale.UnitedKingdom))
+        self.feedback_button.setFlat(True)
+
+        self.horizontalLayout_3.addWidget(self.feedback_button)
+
+        self.horizontalSpacer_13 = QSpacerItem(30, 20, QSizePolicy.Fixed, QSizePolicy.Minimum)
+
+        self.horizontalLayout_3.addItem(self.horizontalSpacer_13)
+
         self.support_button = QPushButton(self.centralwidget)
         self.support_button.setObjectName(u"support_button")
         self.support_button.setFont(font11)
@@ -1085,9 +1104,16 @@ class Ui_MainWindow(object):
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"Default export directory", None))
         self.label_7.setText(QCoreApplication.translate("MainWindow", u"Sound Alert", None))
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"Default framerate", None))
-        self.find_ffmpeg_exe_button.setText(QCoreApplication.translate("MainWindow", u"Find Executable Files", None))
+#if QT_CONFIG(tooltip)
+        self.find_ffmpeg_exe_button.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>Try to find FFmpeg files</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.find_ffmpeg_exe_button.setText(QCoreApplication.translate("MainWindow", u"Find FFmpeg Files", None))
+#if QT_CONFIG(tooltip)
+        self.dwnld_build_button.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>Select a link to website to download FFmpeg builds </p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
         self.dwnld_build_button.setText(QCoreApplication.translate("MainWindow", u"Download", None))
         self.label_8.setText(QCoreApplication.translate("MainWindow", u"FFmpeg", None))
+        self.feedback_button.setText(QCoreApplication.translate("MainWindow", u"Send Feedback", None))
         self.support_button.setText(QCoreApplication.translate("MainWindow", u"Support this Project", None))
         self.version_label.setText(QCoreApplication.translate("MainWindow", u"v 1.0.0", None))
     # retranslateUi
