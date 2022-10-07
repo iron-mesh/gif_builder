@@ -26,6 +26,7 @@ class WorkingState (enum.IntEnum):
 
 URL_SUPPPROJECT = {0:"https://ironmesh.ru/en/other/support-projects", 1:"https://ironmesh.ru/ru/other/support-projects"}
 URL_AUTHOR_PAGE = "https://ironmesh.ru/about"
+URL_FEEDBACK_EMAIL = "mailto:feedback@ironmesh.ru"
 #translatable stings
 
 #filters for file dialog
@@ -82,6 +83,7 @@ LC_TWQM_DEACTIVATEALL = QCoreApplication.translate("interface", "Deactivate All"
 LC_TWQM_ACTIVATEALL = QCoreApplication.translate("interface", "Activate All")
 LC_TWQM_ACTIVITY = QCoreApplication.translate("interface", "Activity")
 LC_DIAL_SELECT_ACTION = QCoreApplication.translate("interface", "Select Action")
+LC_FEEDBACK_SUBJECT = QCoreApplication.translate("interface", "Feedback about GIF Builder")
 
 #translatable stings of tableview header
 

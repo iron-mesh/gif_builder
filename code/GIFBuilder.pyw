@@ -62,6 +62,7 @@ class GIFBuilder (QMainWindow):
         self.ui.manual_button.clicked.connect(self._on_open_manual)
         self.ui.dwnld_build_button.clicked.connect(self._on_download_btn)
         self.ui.find_ffmpeg_exe_button.clicked.connect(self.on_find_ffmpeg_files)
+        self.ui.feedback_button.clicked.connect(self._on_feedback_btn)
         # other initialization
         self.load_settings()
         self._projfile_path:str = ""
@@ -331,6 +332,12 @@ class GIFBuilder (QMainWindow):
             url = QUrl(URL_SUPPPROJECT[1])
         else:
             url = QUrl(URL_SUPPPROJECT[0])
+        if not QDesktopServices.openUrl(url):
+            QMessageBox.warning(self, GBC.LC_WARNING, GBC.LC_MSG_URLOPENERROR + url.path())
+
+    @Slot()
+    def _on_feedback_btn(self):
+        url = QUrl(f"{GBC.URL_FEEDBACK_EMAIL}?subject={GBC.LC_FEEDBACK_SUBJECT} {GBC.VERSION}")
         if not QDesktopServices.openUrl(url):
             QMessageBox.warning(self, GBC.LC_WARNING, GBC.LC_MSG_URLOPENERROR + url.path())
 
