@@ -5,7 +5,7 @@ from PySide2.QtCore import QCoreApplication
 LOGGING_DISABLED = False
 
 VERSION = "1.2.0a"
-COMPATIBLE_VERSION_LIST = ["1.1.0", "1.2.0a","1.2.0"]
+COMPATIBLE_VERSION_LIST = ["1.2.0a","1.2.0"]
 
 WIN_DOWNLOAD_BUILDS_URL = [{'title':QCoreApplication.translate("interface", "Windows builds by BtbN"), 'url':"https://github.com/BtbN/FFmpeg-Builds/releases" },
                            {'title':QCoreApplication.translate("interface", "Windows builds from gyan.dev"), 'url':"https://www.gyan.dev/ffmpeg/builds/" },{'title':QCoreApplication.translate("interface", "Open the Official Site"), 'url':"https://ffmpeg.org/download.html" }]

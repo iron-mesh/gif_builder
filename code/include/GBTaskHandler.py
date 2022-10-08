@@ -153,7 +153,7 @@ class TaskHandler(QThread):
                 command.append(temperal_images_dir); command_palette.append(temperal_images_dir)
             command.append("-i")
             command.append(self._palette_path)
-            if (inputfile_mask is not None) and ((last_frame - first_frame + 1) < imp_media_data.media_file_par.frame_count):
+            if (inputfile_mask is not None):
                 command.append("-frames:v"); command_palette.append("-frames:v")
                 frame_count:str = str(last_frame - first_frame + 1)
                 command.append(frame_count); command_palette.append(frame_count)
