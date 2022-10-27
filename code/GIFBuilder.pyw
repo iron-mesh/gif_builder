@@ -292,6 +292,11 @@ class GIFBuilder (QMainWindow):
             for c in range(8):
                 item = QStandardItem()
                 item.read(input)
+                if c == 1:
+                    imc:ImportedMediaContainer = item.data(role=Qt.UserRole)
+                    imd:ImportedMediaData = ImportedMediaData()
+                    imd = imc.export_imported_media_data()
+                    item.setData(imd, role=Qt.UserRole)
                 item_list.append(item)
             self._task_list_model.appendRow(item_list)
             item_list.clear()
@@ -312,7 +317,15 @@ class GIFBuilder (QMainWindow):
         output.writeString(VERSION)
         for r in range(self._task_list_model.rowCount()):
             for c in range(8):
-                self._task_list_model.item(r, c).write(output)
+                if c == 1:
+                    item:QStandardItem = QStandardItem(self._task_list_model.item(r, c))
+                    imd:ImportedMediaData = item.data(role = Qt.UserRole)
+                    imc:ImportedMediaContainer = ImportedMediaContainer()
+                    imc.load_imported_media_data(imd)
+                    item.setData(imc, role=Qt.UserRole)
+                    item.write(output)
+                else:
+                    self._task_list_model.item(r, c).write(output)
         file.close()
         self._update_window_title()
         self._is_project_changed = False

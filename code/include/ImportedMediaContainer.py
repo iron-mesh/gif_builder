@@ -13,12 +13,22 @@ class ImportedMediaContainer:
     _img_list:list[dict] = field(default_factory=list)
 
     def load_imported_media_data(self, data:ImportedMediaData)->None:
-        """Loads data from obsolete ImportedMediaData """
+        """Loads data from ImportedMediaData instance"""
         self.media_file_par = data.media_file_par
         self.start_frame = data.start_frame
         self.end_frame = data.end_frame
         self.videofile_path = data.videofile_path
         self.import_images(data.imgseq_pathes)
+
+    def export_imported_media_data(self) -> ImportedMediaData:
+        """Export data from this class to ImportedMediaData """
+        imd = ImportedMediaData()
+        imd.media_file_par = self.media_file_par
+        imd.start_frame = self.start_frame
+        imd.end_frame = self.end_frame
+        imd.videofile_path = self.videofile_path
+        imd.imgseq_pathes = self.get_img_list()
+        return imd
 
     def import_images(self, img_seg:list)->None:
         """Recieves list of file addresses and packs them into the class (fields: _dir_list, img_list)  """

@@ -1800,6 +1800,9 @@ background-color: red</string>
           <property name="cursor">
            <cursorShape>PointingHandCursor</cursorShape>
           </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Feel free to contact me if you find a bug or have suggestions, ideas etc.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
           <property name="styleSheet">
            <string notr="true">QPushButton { color:rgb(85, 0, 255)}
 
@@ -1812,7 +1815,7 @@ background-color: red</string>
            <locale language="English" country="UnitedKingdom"/>
           </property>
           <property name="text">
-           <string>Send Feedback</string>
+           <string>Feedback</string>
           </property>
           <property name="flat">
            <bool>true</bool>
