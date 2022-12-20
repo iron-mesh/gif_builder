@@ -2,10 +2,9 @@ import dataclasses, enum
 import logging
 from dataclasses import dataclass
 
-
-
 logging.basicConfig(level=logging.DEBUG)
 #logging.disable(logging.CRITICAL)
+
 
 @enum.unique
 class MediaType(enum.IntEnum):

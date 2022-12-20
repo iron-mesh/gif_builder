@@ -94,7 +94,7 @@ class ImportedMediaContainer:
                 init_dict = True
 
             if init_dict: #init new dictionary (start)
-                if len(img_list)>0:
+                if len(img_list) > 0:
                     close_dict()
                 if dir_name not in dir_list: dir_list.append(dir_name)
                 img_list.append(get_dict_template())
@@ -102,7 +102,8 @@ class ImportedMediaContainer:
                 re_mask = re.compile(r"(\D*)(\d*)(\D*)")
                 match_obj1 = re_mask.search(file_name)
                 head, num_str, tail = match_obj1.groups()
-                if not num_str:
+                is_names_equal = (head + num_str + tail) == file_name
+                if (not num_str) or (not is_names_equal):
                     mask_creating_failed = True
                 else:
                     prev_num = int(num_str)
@@ -129,7 +130,7 @@ class ImportedMediaContainer:
                         range_record_started = False
 
                 if not range_record_started:
-                    img_list[-1]["num_range"].append( [int(num_str), 0])
+                    img_list[-1]["num_range"].append([int(num_str), 0])
                     range_record_started = True
 
             img_list[-1]["file_list"].append(file_name)

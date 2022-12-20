@@ -8,6 +8,7 @@ from PySide2.QtWidgets import QDialog, QWidget, QApplication
 from .GB_constants import *
 from .GB_types import *
 from .GUI.ui_dialog_edit_task import Ui_Dialog
+from dataclasses import replace
 
 logging.basicConfig(level=logging.DEBUG)
 if(LOGGING_DISABLED):
@@ -98,7 +99,7 @@ class GBDialogEditTask(QDialog):
 
         res[0].setCheckable(True)
         res[7].setCheckable(True)
-        res[1].setData(imd, role = Qt.UserRole)
+        res[1].setData(replace(imd), role = Qt.UserRole)
 
         for item in res:
             item.setTextAlignment(Qt.AlignCenter)

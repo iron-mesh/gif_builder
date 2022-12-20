@@ -90,34 +90,59 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="open_button">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>12</pointsize>
-           </font>
-          </property>
-          <property name="toolTip">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Open existing project&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Ctrl+O&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">padding:5px 5px 5px 5px;</string>
-          </property>
-          <property name="locale">
-           <locale language="English" country="UnitedKingdom"/>
-          </property>
-          <property name="text">
-           <string>Open</string>
-          </property>
-          <property name="shortcut">
-           <string>Ctrl+O</string>
-          </property>
-         </widget>
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <item>
+           <widget class="QPushButton" name="open_button">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Open existing project&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Ctrl+O&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">padding:5px 10px 5px 10px;</string>
+            </property>
+            <property name="locale">
+             <locale language="English" country="UnitedKingdom"/>
+            </property>
+            <property name="text">
+             <string>Open</string>
+            </property>
+            <property name="shortcut">
+             <string>Ctrl+O</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="open_resent_button">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">padding:5px 5px 5px 5px;</string>
+            </property>
+            <property name="text">
+             <string>▼</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item>
          <widget class="QPushButton" name="save_button">
@@ -302,7 +327,7 @@ background-color: red</string>
            <locale language="English" country="UnitedKingdom"/>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="tasks_page">
            <property name="inputMethodHints">
@@ -1376,7 +1401,7 @@ background-color: red</string>
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>1027</width>
+                 <width>1006</width>
                  <height>665</height>
                 </rect>
                </property>
@@ -1942,7 +1967,6 @@ background-color: red</string>
  </customwidgets>
  <tabstops>
   <tabstop>new_button</tabstop>
-  <tabstop>open_button</tabstop>
   <tabstop>save_button</tabstop>
   <tabstop>saveAs_button</tabstop>
   <tabstop>close_settings_button</tabstop>

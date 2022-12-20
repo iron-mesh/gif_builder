@@ -17,8 +17,10 @@ import include.GBDialogEditTask as GBDET
 from include.GB_delegates import *
 from include.GB_types import *
 from include.GBTaskHandler import *
+from include.GB_RecentProjects import *
 from include.GB_functions import *
 from include.GUI.ui_main_window import Ui_MainWindow
+from dataclasses import replace
 
 logging.basicConfig(level=logging.DEBUG)
 if(LOGGING_DISABLED):
@@ -31,6 +33,8 @@ class GIFBuilder (QMainWindow):
         super(GIFBuilder, self).__init__()
         self._working_state = WorkingState.EDITING
         self._is_project_changed = False #flag of model changing status
+        self._recent_proj = RecentProjects(self, False)
+        self._recent_proj.link_callback(self._on_open_project)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         # gui elements initialization
@@ -41,6 +45,8 @@ class GIFBuilder (QMainWindow):
         self.ui.inputpath_export_dir.set_mode(Modes.DIRPATH)
         self.ui.inputpath_sound.set_mode(Modes.SOUND)
         self.ui.win_notification_checkBox.setVisible(False)
+        status_bar = QStatusBar()
+        self.setStatusBar(status_bar)
         # buttons initialization
         self.ui.close_settings_button.setVisible(False)
         self.ui.settings_button.clicked.connect(lambda: self.on_show_settings(True))
@@ -52,6 +58,7 @@ class GIFBuilder (QMainWindow):
         self.ui.deleteall_item_button.clicked.connect(self._on_delete_all)
         self.ui.new_button.clicked.connect(self._on_new_project)
         self.ui.open_button.clicked.connect(self._on_open_project)
+        self.ui.open_resent_button.clicked.connect(self._on_openrecent_project)
         self.ui.save_button.clicked.connect(self._on_save_project)
         self.ui.saveAs_button.clicked.connect(lambda :self._on_save_project(save_as=True))
         self.ui.support_button.clicked.connect(self._on_supp_proj)
@@ -98,6 +105,7 @@ class GIFBuilder (QMainWindow):
         self.ui.tableView.setItemDelegateForColumn(5, spinbox_delegate)
         self.ui.tableView.setItemDelegateForColumn(6, spinbox_delegate)
         self.ui.tableView.setItemDelegateForColumn(7, checkbox_delegate)
+
 
         # handlers binding
         self._task_list_model.itemChanged.connect(self._on_item_changed)
@@ -257,13 +265,11 @@ class GIFBuilder (QMainWindow):
     @Slot()
     def _on_new_project(self) -> None:
         logging.debug("_on_new_project")
-        if (self._task_list_model.rowCount() == 0 and not self._projfile_path): return
+        if (self._task_list_model.rowCount() == 0 and not self._projfile_path):
+            QMessageBox.warning(self, GBC.LC_WARNING, GBC.LC_MSG_CLEARALREADY)
+            return
 
-        dialog = QMessageBox(QMessageBox.Question,
-                             GBC.LC_CONFIRMATION, GBC.LC_MSG_NEWPROJECT,
-                             buttons=QMessageBox.Ok |
-                                     QMessageBox.Cancel, parent=self)
-        result = dialog.exec_()
+        result = QMessageBox.question(self, GBC.LC_CONFIRMATION, GBC.LC_MSG_NEWPROJECT, QMessageBox.Ok, QMessageBox.Cancel)
         if(result == QMessageBox.Ok):
             self._projfile_path = ""
             self._clear_model()
@@ -273,9 +279,17 @@ class GIFBuilder (QMainWindow):
 
     @check_workingstate
     @Slot()
-    def _on_open_project(self) -> None:
-        path:str = QFileDialog.getOpenFileName(None, GBC.LC_OPEN_PROJECT_FILE_TITLE, self._projfile_path, f"{GBC.LC_PROJECTFILE_FILTER_TITLE} {GBC.LC_PROJECTFILE_FILTER}")[0]
-        if(not path): return
+    def _on_open_project(self, fpath:str = "") -> None:
+        if not fpath:
+            path:str = QFileDialog.getOpenFileName(None, GBC.LC_OPEN_PROJECT_FILE_TITLE, self._projfile_path, f"{GBC.LC_PROJECTFILE_FILTER_TITLE} {GBC.LC_PROJECTFILE_FILTER}")[0]
+            if(not path): return
+        else:
+            if not os.path.exists(fpath):
+                QMessageBox.warning(self, GBC.LC_ERROR, f"{GBC.LC_MSG_FILEISNTFOUND}:\n {fpath}")
+                return
+            path:str = fpath
+
+
         self._projfile_path = path
         self._clear_model()
         file = QFile(self._projfile_path)
@@ -304,6 +318,12 @@ class GIFBuilder (QMainWindow):
         self._task_list_model.itemChanged.emit(QStandardItem())
         self._update_window_title()
         self._is_project_changed = False
+        self._recent_proj.add_path(self._projfile_path)
+
+    @check_workingstate
+    @Slot()
+    def _on_openrecent_project(self) -> None:
+        self._recent_proj.show_popup()
 
     @check_workingstate
     @Slot()
@@ -329,6 +349,7 @@ class GIFBuilder (QMainWindow):
         file.close()
         self._update_window_title()
         self._is_project_changed = False
+        self._recent_proj.add_path(self._projfile_path)
 
     def _clear_model(self):
        self._task_list_model.removeRows(0, self._task_list_model.rowCount())
@@ -492,6 +513,10 @@ class GIFBuilder (QMainWindow):
         model:QStandardItemModel = self.ui.tableView.selectedIndexes()[0].model()
         for col in range(model.columnCount()):
             buffer.append(QStandardItem(model.item(selected_row, col)))
+        for i in (1, 2):
+            buffer[i].setData(
+                replace(model.item(selected_row,i).data(role=Qt.UserRole)),
+                role=Qt.UserRole)
         model.insertRow(selected_row + 1, buffer)
         self._task_list_model.itemChanged.emit(QStandardItem())
 
@@ -503,6 +528,7 @@ class GIFBuilder (QMainWindow):
 
 
     def closeEvent(self, e):
+        self._recent_proj.save_list_to_hdd()
         if self._working_state != WorkingState.EDITING:
             e.ignore()
             return

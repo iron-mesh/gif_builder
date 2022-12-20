@@ -4,8 +4,8 @@ from PySide2.QtCore import QCoreApplication
 
 LOGGING_DISABLED = False
 
-VERSION = "1.2.0"
-COMPATIBLE_VERSION_LIST = ["1.2.0a","1.2.0"]
+VERSION = "1.3.0dev"
+COMPATIBLE_VERSION_LIST = ["1.2.0a","1.2.0", "1.3.0dev", "1.3.0"]
 
 WIN_DOWNLOAD_BUILDS_URL = [{'title':QCoreApplication.translate("interface", "Windows builds by BtbN"), 'url':"https://github.com/BtbN/FFmpeg-Builds/releases" },
                            {'title':QCoreApplication.translate("interface", "Windows builds from gyan.dev"), 'url':"https://www.gyan.dev/ffmpeg/builds/" },{'title':QCoreApplication.translate("interface", "Open the Official Site"), 'url':"https://ffmpeg.org/download.html" }]
@@ -98,11 +98,14 @@ LC_HEADERLOOP = QCoreApplication.translate("interface", "Loop Animation")
 
 #messages
 LC_MSG_NOTCOMPITABLE = QCoreApplication.translate("messages", "Version of project file isn't compatible! \n Project was created in version:")
+LC_MSG_FILEISNTFOUND = QCoreApplication.translate("messages", "This file hasn't been found")
+LC_MSG_NOTFOUND = QCoreApplication.translate("messages", "not found")
 LC_MSG_DELETEALL = QCoreApplication.translate("messages", "All tasks will be deleted. Are you sure?")
-LC_MSG_NEWPROJECT = QCoreApplication.translate("messages", "Do you want to create new project?")
+LC_MSG_NEWPROJECT = QCoreApplication.translate("messages", "Do you want to create new project? All data will be deleted.")
 LC_MSG_URLOPENERROR = QCoreApplication.translate("messages", "Cannot open link: ")
+LC_MSG_CLEARALREADY = QCoreApplication.translate("messages", "The project already clear")
 LC_MSG_EXT_NOT_EQUAL = QCoreApplication.translate("messages", "File formats must be the same")
-LC_MSG_EXIT_SAVE_QUESTION = QCoreApplication.translate("messages", "Do you want to save current project?")
+LC_MSG_EXIT_SAVE_QUESTION = QCoreApplication.translate("messages", "Do you want to save current project before exiting?")
 LC_MSG_FFMPEG_PATH_NOT_CORRECT = QCoreApplication.translate("messages", "FFmpeg path is not correct or undefined!")
 LC_MSG_FFPROBE_PATH_NOT_CORRECT = QCoreApplication.translate("messages", "FFprobe path is not correct or undefined!")
 LC_MSG_SOUND_ISNT_SELECTED = QCoreApplication.translate("messages", "Sound file isn't selected. Go to Setting to select it.")

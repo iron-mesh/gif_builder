@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'main_windowfEMjHQ.ui'
+## Form generated from reading UI file 'main_windowfWqHBs.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -56,15 +56,29 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.new_button)
 
+        self.horizontalLayout_6 = QHBoxLayout()
+        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
         self.open_button = QPushButton(self.centralwidget)
         self.open_button.setObjectName(u"open_button")
         sizePolicy.setHeightForWidth(self.open_button.sizePolicy().hasHeightForWidth())
         self.open_button.setSizePolicy(sizePolicy)
         self.open_button.setFont(font)
-        self.open_button.setStyleSheet(u"padding:5px 5px 5px 5px;")
+        self.open_button.setStyleSheet(u"padding:5px 10px 5px 10px;")
         self.open_button.setLocale(QLocale(QLocale.English, QLocale.UnitedKingdom))
 
-        self.verticalLayout.addWidget(self.open_button)
+        self.horizontalLayout_6.addWidget(self.open_button)
+
+        self.open_resent_button = QPushButton(self.centralwidget)
+        self.open_resent_button.setObjectName(u"open_resent_button")
+        sizePolicy.setHeightForWidth(self.open_resent_button.sizePolicy().hasHeightForWidth())
+        self.open_resent_button.setSizePolicy(sizePolicy)
+        self.open_resent_button.setFont(font)
+        self.open_resent_button.setStyleSheet(u"padding:5px 5px 5px 5px;")
+
+        self.horizontalLayout_6.addWidget(self.open_resent_button)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout_6)
 
         self.save_button = QPushButton(self.centralwidget)
         self.save_button.setObjectName(u"save_button")
@@ -639,7 +653,7 @@ class Ui_MainWindow(object):
         self.settings_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 1027, 665))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 1006, 665))
         self.verticalLayout_8 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
         self.formLayout = QFormLayout()
@@ -938,8 +952,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_5.addLayout(self.verticalLayout_2)
 
         MainWindow.setCentralWidget(self.centralwidget)
-        QWidget.setTabOrder(self.new_button, self.open_button)
-        QWidget.setTabOrder(self.open_button, self.save_button)
+        QWidget.setTabOrder(self.new_button, self.save_button)
         QWidget.setTabOrder(self.save_button, self.saveAs_button)
         QWidget.setTabOrder(self.saveAs_button, self.close_settings_button)
         QWidget.setTabOrder(self.close_settings_button, self.settings_button)
@@ -959,7 +972,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(0)
         self.status_stack.setCurrentIndex(1)
         self.cb_language.setCurrentIndex(0)
 
@@ -992,6 +1005,7 @@ class Ui_MainWindow(object):
 #if QT_CONFIG(shortcut)
         self.open_button.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+O", None))
 #endif // QT_CONFIG(shortcut)
+        self.open_resent_button.setText(QCoreApplication.translate("MainWindow", u"\u25bc", None))
 #if QT_CONFIG(tooltip)
         self.save_button.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>Save current project</p><p><span style=\" font-weight:600;\">Ctrl+S</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
