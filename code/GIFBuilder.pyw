@@ -105,6 +105,7 @@ class GIFBuilder (QMainWindow):
         self.ui.tableView.setItemDelegateForColumn(5, spinbox_delegate)
         self.ui.tableView.setItemDelegateForColumn(6, spinbox_delegate)
         self.ui.tableView.setItemDelegateForColumn(7, checkbox_delegate)
+        self.setAcceptDrops(1)
 
 
         # handlers binding
@@ -590,6 +591,25 @@ class GIFBuilder (QMainWindow):
                     break
             else:
                 break
+
+    def dragEnterEvent(self, event) -> None:
+        if event.mimeData().hasUrls():
+            event.setDropAction(Qt.MoveAction)
+            file_path = event.mimeData().urls()[0].toLocalFile()
+            extension = ".gbp"
+            if (os.path.splitext(file_path)[1] == extension):
+                event.accept()
+            else:
+                event.ignore()
+        else:
+            event.ignore()
+
+    def dropEvent(self, event) -> None:
+        if event.mimeData().hasUrls():
+            file_path = event.mimeData().urls()[0].toLocalFile()
+            self._on_open_project(file_path)
+
+
 
 
 
