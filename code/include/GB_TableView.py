@@ -52,25 +52,7 @@ class GB_TableView(QTableView):
 
             return True
 
-    def dragEnterEvent(self, event) -> None:
-        if event.mimeData().hasUrls():
-            event.setDropAction(Qt.MoveAction)
-            file_path = event.mimeData().urls()[0].toLocalFile()
-            extension = ".gbp"
-            if (os.path.splitext(file_path)[1] == extension):
-                event.accept()
-            else:
-                event.ignore()
-        else:
-            event.ignore()
 
-    def dropEvent(self, event) -> None:
-        if event.mimeData().hasUrls():
-            file_path = event.mimeData().urls()[0].toLocalFile()
-            self._on_open_project(file_path)
-            event.accept()
-        else:
-            event.ignore()
 
     def retranslateUi(self):
         importlib.reload(GBC)
