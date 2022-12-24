@@ -1,7 +1,8 @@
 from PySide2.QtWidgets import QTableView, QMenu,QAction
-from PySide2.QtCore import Signal
+from PySide2.QtCore import Signal, Qt
 from PySide2.QtGui import QCursor
-import logging, importlib
+
+import logging, importlib, os
 import include.GB_constants as GBC
 
 logging.basicConfig(level=logging.DEBUG)
@@ -50,6 +51,26 @@ class GB_TableView(QTableView):
             self.contextMenu.popup(QCursor.pos())
 
             return True
+
+    def dragEnterEvent(self, event) -> None:
+        if event.mimeData().hasUrls():
+            event.setDropAction(Qt.MoveAction)
+            file_path = event.mimeData().urls()[0].toLocalFile()
+            extension = ".gbp"
+            if (os.path.splitext(file_path)[1] == extension):
+                event.accept()
+            else:
+                event.ignore()
+        else:
+            event.ignore()
+
+    def dropEvent(self, event) -> None:
+        if event.mimeData().hasUrls():
+            file_path = event.mimeData().urls()[0].toLocalFile()
+            self._on_open_project(file_path)
+            event.accept()
+        else:
+            event.ignore()
 
     def retranslateUi(self):
         importlib.reload(GBC)

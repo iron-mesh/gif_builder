@@ -608,6 +608,9 @@ class GIFBuilder (QMainWindow):
         if event.mimeData().hasUrls():
             file_path = event.mimeData().urls()[0].toLocalFile()
             self._on_open_project(file_path)
+            event.accept()
+        else:
+            event.ignore()
 
 
 
