@@ -53,6 +53,5 @@ class GB_TableView(QTableView):
             return True
 
 
-
     def retranslateUi(self):
         importlib.reload(GBC)

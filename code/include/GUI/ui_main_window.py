@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'main_windowfWqHBs.ui'
+## Form generated from reading UI file 'main_windoweKhBqr.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -74,6 +74,7 @@ class Ui_MainWindow(object):
         self.open_resent_button.setSizePolicy(sizePolicy)
         self.open_resent_button.setFont(font)
         self.open_resent_button.setStyleSheet(u"padding:5px 5px 5px 5px;")
+        self.open_resent_button.setLocale(QLocale(QLocale.English, QLocale.UnitedKingdom))
 
         self.horizontalLayout_6.addWidget(self.open_resent_button)
 
@@ -653,7 +654,7 @@ class Ui_MainWindow(object):
         self.settings_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 1006, 665))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 489, 223))
         self.verticalLayout_8 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
         self.formLayout = QFormLayout()
@@ -1005,6 +1006,9 @@ class Ui_MainWindow(object):
 #if QT_CONFIG(shortcut)
         self.open_button.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+O", None))
 #endif // QT_CONFIG(shortcut)
+#if QT_CONFIG(tooltip)
+        self.open_resent_button.setToolTip(QCoreApplication.translate("MainWindow", u"Recent Projects", None))
+#endif // QT_CONFIG(tooltip)
         self.open_resent_button.setText(QCoreApplication.translate("MainWindow", u"\u25bc", None))
 #if QT_CONFIG(tooltip)
         self.save_button.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>Save current project</p><p><span style=\" font-weight:600;\">Ctrl+S</span></p></body></html>", None))

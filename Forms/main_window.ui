@@ -134,8 +134,14 @@
               <pointsize>12</pointsize>
              </font>
             </property>
+            <property name="toolTip">
+             <string>Recent Projects</string>
+            </property>
             <property name="styleSheet">
              <string notr="true">padding:5px 5px 5px 5px;</string>
+            </property>
+            <property name="locale">
+             <locale language="English" country="UnitedKingdom"/>
             </property>
             <property name="text">
              <string>▼</string>
@@ -1401,8 +1407,8 @@ background-color: red</string>
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>1006</width>
-                 <height>665</height>
+                 <width>489</width>
+                 <height>223</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_8">
