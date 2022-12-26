@@ -614,7 +614,7 @@ class GIFBuilder (QMainWindow):
 
 
 
-
+#start
 
 
 app = QApplication(sys.argv)
