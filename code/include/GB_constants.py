@@ -111,3 +111,13 @@ LC_MSG_FFPROBE_PATH_NOT_CORRECT = QCoreApplication.translate("messages", "FFprob
 LC_MSG_SOUND_ISNT_SELECTED = QCoreApplication.translate("messages", "Sound file isn't selected. Go to Setting to select it.")
 LC_MSG_SELECT_DIR_FFMPEG_SEARCH = QCoreApplication.translate("messages", "All or some files haven't  been found in the system. Do you want to choose a folder to search?")
 LC_INVALID_FILE_TYPE = QCoreApplication.translate("messages", "Invalid file type")
+
+IMG_EXTENSIONS = LC_IMAGEFILE_FILTER
+VIDEO_EXTENSIONS = LC_VIDEOFILE_FILTER
+
+for i in ['(', ')', '*']:
+    IMG_EXTENSIONS = IMG_EXTENSIONS.replace(i, '')
+    VIDEO_EXTENSIONS = VIDEO_EXTENSIONS.replace(i, '')
+
+VIDEO_EXTENSIONS = VIDEO_EXTENSIONS.split(' ')
+IMG_EXTENSIONS = IMG_EXTENSIONS.split(' ')

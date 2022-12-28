@@ -1,6 +1,7 @@
 import dataclasses, enum
 import logging
 from dataclasses import dataclass
+from PySide2.QtCore import Qt
 
 logging.basicConfig(level=logging.DEBUG)
 #logging.disable(logging.CRITICAL)
@@ -20,6 +21,7 @@ class SettingsData:
     sound_path: str = ""
     exp_dir:str = ""
     def_framerate:int = 24
+    looped_animation:Qt.CheckState = Qt.Unchecked
 
 @dataclass
 class MediaFileParameters:

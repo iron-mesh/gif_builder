@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'main_windoweKhBqr.ui'
+## Form generated from reading UI file 'main_windowwmvmMj.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -654,7 +654,7 @@ class Ui_MainWindow(object):
         self.settings_scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 489, 223))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 1006, 665))
         self.verticalLayout_8 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
         self.formLayout = QFormLayout()
@@ -826,6 +826,18 @@ class Ui_MainWindow(object):
 
         self.formLayout.setWidget(1, QFormLayout.LabelRole, self.label_8)
 
+        self.label_9 = QLabel(self.scrollAreaWidgetContents)
+        self.label_9.setObjectName(u"label_9")
+        self.label_9.setFont(font)
+
+        self.formLayout.setWidget(8, QFormLayout.LabelRole, self.label_9)
+
+        self.checkBox_looped_animation = QCheckBox(self.scrollAreaWidgetContents)
+        self.checkBox_looped_animation.setObjectName(u"checkBox_looped_animation")
+        self.checkBox_looped_animation.setFont(font)
+
+        self.formLayout.setWidget(8, QFormLayout.FieldRole, self.checkBox_looped_animation)
+
 
         self.verticalLayout_8.addLayout(self.formLayout)
 
@@ -973,7 +985,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(1)
         self.status_stack.setCurrentIndex(1)
         self.cb_language.setCurrentIndex(0)
 
@@ -1131,6 +1143,8 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.dwnld_build_button.setText(QCoreApplication.translate("MainWindow", u"Download", None))
         self.label_8.setText(QCoreApplication.translate("MainWindow", u"FFmpeg", None))
+        self.label_9.setText(QCoreApplication.translate("MainWindow", u"Looped animation by default", None))
+        self.checkBox_looped_animation.setText(QCoreApplication.translate("MainWindow", u"Yes", None))
 #if QT_CONFIG(tooltip)
         self.feedback_button.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:10pt;\">Feel free to contact me if you find a bug or have suggestions, ideas etc.</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)

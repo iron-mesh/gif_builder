@@ -1,13 +1,12 @@
-import json
-import re
-import subprocess, os, logging
-
-
+import json, re, subprocess, os, logging
 
 from .GB_types import *
 from .GB_constants import *
 from types import ModuleType
 from PySide2.QtWidgets import QMessageBox
+from PySide2.QtGui import QStandardItem
+from PySide2.QtCore import Qt
+from dataclasses import replace
 
 
 from importlib import reload
@@ -96,6 +95,59 @@ def find_ffmpeg_files(dir:str)->dict:
                 if check_exefile(path, "ffprobe"):
                     result["ffprobe"] = path
     return result
+
+
+def get_model_from_source(type:MediaType, source, settings:SettingsData,fname:str = "")->list[QStandardItem]:
+    imd:ImportedMediaData = ImportedMediaData()
+    imd.media_file_par = MediaFileParameters()
+    mfd = imd.media_file_par
+    mfd.type = type
+    if(type == MediaType.VIDEO):
+        imd.videofile_path = source
+        mfd = get_media_parameters(settings.ffprobe_path, source, type)
+        imd.end_frame = mfd.frame_count
+    elif(type == MediaType.IMAGE):
+        imd.imgseq_pathes = source
+        mfd = get_media_parameters(settings.ffprobe_path, source[0], type)
+        mfd.framerate = settings.def_framerate
+        mfd.frame_count = len(source)
+        imd.end_frame = mfd.frame_count
+    imd.start_frame = 1
+
+    res = list()
+    for i in range(8):
+        res.append(QStandardItem())
+
+    res[0].setData(Qt.Checked, role=Qt.CheckStateRole)
+    res[0].setCheckable(True)
+    if (imd.media_file_par.type == MediaType.VIDEO):
+        res[1].setText(imd.videofile_path)
+    else:
+        res[1].setText(imd.imgseq_pathes[0])
+    res[1].setEditable(False)
+    res[1].setData(replace(imd), role=Qt.UserRole)
+
+    export_path:str = ""
+    if(settings.exp_dir):
+        file_name: str = os.path.basename(imd.videofile_path) if type == MediaType.VIDEO else os.path.basename(
+            imd.imgseq_pathes[0])
+        file_name = os.path.splitext(file_name)[0] if not fname else fname
+        export_path = os.path.join(settings.exp_dir, file_name + '.gif')
+
+    res[2].setText(export_path)
+    filter_options: FilterOptions = FilterOptions()
+    res[2].setData(filter_options, role=Qt.UserRole)
+    res[3].setText(str(imd.start_frame))
+    res[4].setText(str(imd.end_frame))
+    res[5].setText(str(mfd.framerate))
+    res[6].setText("100")
+    res[7].setData(settings.looped_animation, role=Qt.CheckStateRole)
+    res[7].setCheckable(True)
+
+    for item in res:
+        item.setTextAlignment(Qt.AlignCenter)
+
+    return res
 
 
 

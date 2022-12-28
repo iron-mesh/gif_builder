@@ -173,6 +173,7 @@ class GIFBuilder (QMainWindow):
                 self.ui.inputpath_export_dir.set_path(s.exp_dir)
                 self.ui.inputpath_sound.set_path(s.sound_path)
                 self.ui.sb_default_framerate.setValue(s.def_framerate)
+                self.ui.checkBox_looped_animation.setCheckState(s.looped_animation)
         except FileNotFoundError:
             self.save_settings()
 
@@ -186,6 +187,7 @@ class GIFBuilder (QMainWindow):
         buf_setting.exp_dir = self.ui.inputpath_export_dir.get_path()
         buf_setting.sound_path = self.ui.inputpath_sound.get_path()
         buf_setting.def_framerate = self.ui.sb_default_framerate.value()
+        buf_setting.looped_animation =self.ui.checkBox_looped_animation.checkState()
 
         if(pickle.dumps(buf_setting)!=pickle.dumps(self.settings)):
             logging.debug("Setting rewriting")
@@ -205,6 +207,7 @@ class GIFBuilder (QMainWindow):
         dialog = GBDET.GBDialogEditTask(self, self.settings)
         dialog.setWindowTitle(GBC.LC_ADDNEWTASK)
         dialog._ui.sb_framerate.setValue(self.settings.def_framerate)
+        dialog._ui.cb_loopanimation.setCheckState(Qt.Checked if self.settings.looped_animation else Qt.Unchecked)
         dialog._ui.btn_add.clicked.connect(add_row)
         dialog._ui.buttonBox.hide()
         if(self.settings.exp_dir):
@@ -592,29 +595,66 @@ class GIFBuilder (QMainWindow):
             else:
                 break
 
+    @check_workingstate
     def dragEnterEvent(self, event) -> None:
+        # if event.mimeData().hasUrls():
+        #     event.setDropAction(Qt.MoveAction)
+        #     file_path = event.mimeData().urls()[0].toLocalFile()
+        #     extension = ".gbp"
+        #     if (os.path.splitext(file_path)[1] == extension):
+        #         event.accept()
+        #     else:
+        #         event.ignore()
+        # else:
+        #     event.ignore()
         if event.mimeData().hasUrls():
-            event.setDropAction(Qt.MoveAction)
-            file_path = event.mimeData().urls()[0].toLocalFile()
-            extension = ".gbp"
-            if (os.path.splitext(file_path)[1] == extension):
-                event.accept()
-            else:
-                event.ignore()
+            event.accept()
         else:
             event.ignore()
 
+    @check_workingstate
     def dropEvent(self, event) -> None:
         if event.mimeData().hasUrls():
-            file_path = event.mimeData().urls()[0].toLocalFile()
-            self._on_open_project(file_path)
+            img_extension:str = ""
+            img_list:list[str] = []
+            for i, el in enumerate(event.mimeData().urls()):
+                path = el.toLocalFile()
+                if (os.path.isfile(path) and os.path.splitext(path)[1] == ".gbp"):
+                    self._on_open_project(path)
+                    event.accept()
+                    return
+
+                elif (os.path.isfile(el.toLocalFile()) and os.path.splitext(path)[1] in IMG_EXTENSIONS):
+                    if not img_extension:
+                        img_extension = os.path.splitext(path)[1]
+                    if os.path.splitext(path)[1] == img_extension:
+                        img_list.append(path)
+
+                elif (os.path.isdir(path)):
+                    extension:str = ""
+                    file_list = []
+                    for file_name in os.listdir(path):
+                        file_path = os.path.join(path, file_name)
+                        if (not os.path.isfile(file_path)) or (os.path.splitext(file_name)[1] not in IMG_EXTENSIONS): continue
+                        if(not extension):
+                            extension = os.path.splitext(file_name)[1]
+                        if (os.path.splitext(file_name)[1] == extension):
+                            file_list.append(file_path)
+
+                    exf_file_name = os.path.normpath(path).split(os.sep)[-1]
+                    self._task_list_model.appendRow(get_model_from_source(MediaType.IMAGE, file_list, self.settings, exf_file_name))
+
+                elif (os.path.isfile(el.toLocalFile()) and os.path.splitext(path)[1] in VIDEO_EXTENSIONS):
+                    self._task_list_model.appendRow(get_model_from_source(MediaType.VIDEO, path, self.settings))
+
+            if len(img_list) > 0:
+                self._task_list_model.appendRow(get_model_from_source(MediaType.IMAGE, img_list, self.settings))
+            self._task_list_model.itemChanged.emit(QStandardItem())
             event.accept()
         else:
             event.ignore()
 
 
-
-#start
 
 
 app = QApplication(sys.argv)
