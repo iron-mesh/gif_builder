@@ -2,7 +2,7 @@ import enum
 
 from PySide2.QtCore import QCoreApplication
 
-LOGGING_DISABLED = False
+LOGGING_DISABLED = True
 
 VERSION = "1.3.0dev"
 COMPATIBLE_VERSION_LIST = ["1.2.0a","1.2.0", "1.3.0dev", "1.3.0"]
@@ -84,6 +84,7 @@ LC_TWQM_ACTIVATEALL = QCoreApplication.translate("interface", "Activate All")
 LC_TWQM_ACTIVITY = QCoreApplication.translate("interface", "Activity")
 LC_DIAL_SELECT_ACTION = QCoreApplication.translate("interface", "Select Action")
 LC_FEEDBACK_SUBJECT = QCoreApplication.translate("interface", "Feedback about GIF Builder")
+LC_NOTIFICATION = QCoreApplication.translate("interface", "Notification")
 
 #translatable stings of tableview header
 
@@ -111,6 +112,7 @@ LC_MSG_FFPROBE_PATH_NOT_CORRECT = QCoreApplication.translate("messages", "FFprob
 LC_MSG_SOUND_ISNT_SELECTED = QCoreApplication.translate("messages", "Sound file isn't selected. Go to Setting to select it.")
 LC_MSG_SELECT_DIR_FFMPEG_SEARCH = QCoreApplication.translate("messages", "All or some files haven't  been found in the system. Do you want to choose a folder to search?")
 LC_INVALID_FILE_TYPE = QCoreApplication.translate("messages", "Invalid file type")
+LC_FILTER_SETTINGS_SAVED = QCoreApplication.translate("messages", "Filter setting has been saved")
 
 IMG_EXTENSIONS = LC_IMAGEFILE_FILTER
 VIDEO_EXTENSIONS = LC_VIDEOFILE_FILTER

@@ -135,7 +135,7 @@ def get_model_from_source(type:MediaType, source, settings:SettingsData,fname:st
         export_path = os.path.join(settings.exp_dir, file_name + '.gif')
 
     res[2].setText(export_path)
-    filter_options: FilterOptions = FilterOptions()
+    filter_options: FilterOptions = replace(settings.default_filter_setting)
     res[2].setData(filter_options, role=Qt.UserRole)
     res[3].setText(str(imd.start_frame))
     res[4].setText(str(imd.end_frame))

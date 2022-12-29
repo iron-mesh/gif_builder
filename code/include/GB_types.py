@@ -3,14 +3,21 @@ import logging
 from dataclasses import dataclass
 from PySide2.QtCore import Qt
 
-logging.basicConfig(level=logging.DEBUG)
 #logging.disable(logging.CRITICAL)
+logging.basicConfig(level=logging.DEBUG)
 
 
 @enum.unique
 class MediaType(enum.IntEnum):
     VIDEO = 0
     IMAGE = 1
+
+@dataclass
+class FilterOptions:
+    stats_mode:str = 'full'
+    dither_mode: str = 'sierra2_4a'
+    bayer_scale: int = 2
+    diff_mode: str = 'none'
 
 @dataclass
 class SettingsData:
@@ -22,6 +29,8 @@ class SettingsData:
     exp_dir:str = ""
     def_framerate:int = 24
     looped_animation:Qt.CheckState = Qt.Unchecked
+    default_filter_setting:FilterOptions = FilterOptions()
+
 
 @dataclass
 class MediaFileParameters:
@@ -34,14 +43,6 @@ class MediaFileParameters:
 
     def __str__(self) -> str:
         return f" framerate: {self.framerate} \n width: {self.width} \n height: {self.height} \n frame_count: {self.frame_count} \n type: {self.type} "
-
-
-@dataclass
-class FilterOptions:
-    stats_mode:str = 'full'
-    dither_mode: str = 'sierra2_4a'
-    bayer_scale: int = 2
-    diff_mode: str = 'none'
 
 @dataclass
 class ImportedMediaData:

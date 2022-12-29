@@ -71,6 +71,7 @@ class GIFBuilder (QMainWindow):
         self.ui.find_ffmpeg_exe_button.clicked.connect(self.on_find_ffmpeg_files)
         self.ui.feedback_button.clicked.connect(self._on_feedback_btn)
         # other initialization
+        self.settings = SettingsData()
         self.load_settings()
         self._projfile_path:str = ""
         self.ui.soound_alert_checkBox.stateChanged.connect(self._on_soundalert_changed)
@@ -163,10 +164,10 @@ class GIFBuilder (QMainWindow):
             self.ui.settings_button.setVisible(True)
 
     def load_settings(self)->None:
-        self.settings:SettingsData = SettingsData()
         try:
             with open(r"settings.cfg", "rb") as s_file:
                 self.settings = s = pickle.load(s_file)
+                if type(s.default_filter_setting) is not FilterOptions: s.default_filter_setting = FilterOptions()
                 self.ui.cb_language.setCurrentIndex(s.language_index)
                 self.ui.inputpath_ffmpeg.set_path(s.ffmpeg_path)
                 self.ui.inputpath_ffprobe.set_path(s.ffprobe_path)
@@ -180,21 +181,23 @@ class GIFBuilder (QMainWindow):
     @Slot()
     def save_settings(self)->None:
         logging.debug("save settings")
-        buf_setting = SettingsData()
-        buf_setting.language_index = self.ui.cb_language.currentIndex()
-        buf_setting.ffmpeg_path = self.ui.inputpath_ffmpeg.get_path()
-        buf_setting.ffprobe_path = self.ui.inputpath_ffprobe.get_path()
-        buf_setting.exp_dir = self.ui.inputpath_export_dir.get_path()
-        buf_setting.sound_path = self.ui.inputpath_sound.get_path()
-        buf_setting.def_framerate = self.ui.sb_default_framerate.value()
-        buf_setting.looped_animation =self.ui.checkBox_looped_animation.checkState()
+        saved_setting = SettingsData()
+        with open(r"settings.cfg", "rb") as s_file:
+            saved_setting = pickle.load(s_file)
 
-        if(pickle.dumps(buf_setting)!=pickle.dumps(self.settings)):
+        self.settings.language_index = self.ui.cb_language.currentIndex()
+        self.settings.ffmpeg_path = self.ui.inputpath_ffmpeg.get_path()
+        self.settings.ffprobe_path = self.ui.inputpath_ffprobe.get_path()
+        self.settings.exp_dir = self.ui.inputpath_export_dir.get_path()
+        self.settings.sound_path = self.ui.inputpath_sound.get_path()
+        self.settings.def_framerate = self.ui.sb_default_framerate.value()
+        self.settings.looped_animation =self.ui.checkBox_looped_animation.checkState()
+
+        if(pickle.dumps(saved_setting)!=pickle.dumps(self.settings)):
             logging.debug("Setting rewriting")
-            self.settings = buf_setting
             with open(r"settings.cfg", "wb") as s_file:
-                pickle.dump(buf_setting, s_file)
-        self.settings = buf_setting
+                pickle.dump(self.settings, s_file)
+
 
     @check_workingstate
     @check_ffprobe
@@ -205,13 +208,8 @@ class GIFBuilder (QMainWindow):
             self._task_list_model.itemChanged.emit(QStandardItem())
 
         dialog = GBDET.GBDialogEditTask(self, self.settings)
-        dialog.setWindowTitle(GBC.LC_ADDNEWTASK)
-        dialog._ui.sb_framerate.setValue(self.settings.def_framerate)
-        dialog._ui.cb_loopanimation.setCheckState(Qt.Checked if self.settings.looped_animation else Qt.Unchecked)
         dialog._ui.btn_add.clicked.connect(add_row)
-        dialog._ui.buttonBox.hide()
-        if(self.settings.exp_dir):
-            dialog._ui.ip_export_file.set_path(os.path.join(self.settings.exp_dir,"untitled.gif"))
+        dialog.save_filter_settings_clicked.connect(self.save_filter_setting)
         res = dialog.exec_()
         if(res == QDialog.Accepted):
             add_row()
@@ -222,11 +220,7 @@ class GIFBuilder (QMainWindow):
     def _on_edit_item(self)->None:
         i_list = self.ui.tableView.selectedIndexes()
         if(not i_list): return
-        dialog = GBDET.GBDialogEditTask(self, self.settings)
-        dialog.setWindowTitle(GBC.LC_EDITTASK)
-        dialog._ui.btn_add.hide()
-        dialog._ui.btn_cancel.hide()
-        dialog._ui.btn_addclose.hide()
+        dialog = GBDET.GBDialogEditTask(self, self.settings, edit_mode=True)
         dialog.import_data(i_list)
         res = dialog.exec_()
         if (res == QDialog.Accepted):
@@ -564,6 +558,12 @@ class GIFBuilder (QMainWindow):
         for row in range(model.rowCount()):
             model.item(row, 0).setCheckState(Qt.Checked if status else Qt.Unchecked)
 
+    @Slot(str)
+    def save_filter_setting(self, data:FilterOptions):
+        self.settings.default_filter_setting = data
+        self.save_settings()
+        QMessageBox.information(self, GBC.LC_NOTIFICATION, GBC.LC_FILTER_SETTINGS_SAVED)
+
     @Slot()
     def on_find_ffmpeg_files(self):
         search_res:dict = {}
@@ -648,6 +648,7 @@ class GIFBuilder (QMainWindow):
                     self._task_list_model.appendRow(get_model_from_source(MediaType.VIDEO, path, self.settings))
 
             if len(img_list) > 0:
+                logging.debug(img_list)
                 self._task_list_model.appendRow(get_model_from_source(MediaType.IMAGE, img_list, self.settings))
             self._task_list_model.itemChanged.emit(QStandardItem())
             event.accept()

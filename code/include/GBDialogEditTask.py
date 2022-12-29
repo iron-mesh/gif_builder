@@ -1,34 +1,60 @@
-import sys
+import pickle
+import sys, os
 
 import PySide2.QtWidgets as wgts
 from PySide2.QtCore import *
 from PySide2.QtGui import *
 from PySide2.QtWidgets import QDialog, QWidget, QApplication
 
-from .GB_constants import *
+# from .GB_constants import *
+import include.GB_constants as GBC
 from .GB_types import *
 from .GUI.ui_dialog_edit_task import Ui_Dialog
 from dataclasses import replace
 
 logging.basicConfig(level=logging.DEBUG)
-if(LOGGING_DISABLED):
+if(GBC.LOGGING_DISABLED):
     logging.disable(logging.CRITICAL)
 
 
 class GBDialogEditTask(QDialog):
     """ Class provides element of UI to input path(es) to video or image sequence"""
+    save_filter_settings_clicked = Signal(FilterOptions)
 
-    def __init__(self, parent, app_set:SettingsData):
+    def __init__(self, parent, app_set:SettingsData, edit_mode:bool = False):
         super().__init__()
         self._ui = Ui_Dialog()
         self._ui.setupUi(self)
         if parent.windowIcon():
             self.setWindowIcon(parent.windowIcon())
-        self._ui.ip_export_file.set_mode(Modes.SAVE_IMAGE)
-        self._ui.ip_export_file.set_placeholder_text(LC_EXPORTFILEPATH)
+        self._ui.ip_export_file.set_mode(GBC.Modes.SAVE_IMAGE)
+        self._ui.ip_export_file.set_placeholder_text(GBC.LC_EXPORTFILEPATH)
         self._ui.isfp_import_media.link_appsettings(app_set)
         self._ui.isfp_import_media.path_changed.connect(self._on_path_changed)
         self._ui.cb_dither_mode.currentIndexChanged.connect(self._on_dither_changed)
+        self._ui.btn_save_filter_setting.clicked.connect(self._on_save_filter_settings)
+
+        if not edit_mode:
+            self.setWindowTitle(GBC.LC_ADDNEWTASK)
+            self._ui.sb_framerate.setValue(app_set.def_framerate)
+            self._ui.cb_loopanimation.setCheckState(Qt.Checked if app_set.looped_animation else Qt.Unchecked)
+            self._ui.buttonBox.hide()
+            if (app_set.exp_dir):
+                self._ui.ip_export_file.set_path(os.path.join(app_set.exp_dir, "untitled.gif"))
+
+            self._ui.cb_stats_mode.setCurrentText(app_set.default_filter_setting.stats_mode)
+            self._ui.cb_dither_mode.setCurrentText(app_set.default_filter_setting.dither_mode)
+            self._ui.sb_bayer_scale.setValue(app_set.default_filter_setting.bayer_scale)
+            self._ui.cb_diff_mode.setCurrentText(app_set.default_filter_setting.diff_mode)
+        else:
+            self.setWindowTitle(GBC.LC_EDITTASK)
+            self._ui.btn_add.hide()
+            self._ui.btn_cancel.hide()
+            self._ui.btn_addclose.hide()
+            self._ui.btn_save_filter_setting.hide()
+            
+
+
 
     def import_data(self, i_list:list[QModelIndex])->None:
         """recieves list of indexes and puts values to form"""
@@ -72,7 +98,7 @@ class GBDialogEditTask(QDialog):
         model.setData(i_list[6], str(self._ui.sb_scale.value()))
         model.setData(i_list[7], self._ui.cb_loopanimation.checkState(), role = Qt.CheckStateRole)
 
-    def get_data(self)->list:
+    def get_data(self)->list[QStandardItem]:
         """return list of QStandardItem"""
         res = []
         for i in range(8):
@@ -118,6 +144,12 @@ class GBDialogEditTask(QDialog):
             self._ui.sb_bayer_scale.setEnabled(False)
         else:
             self._ui.sb_bayer_scale.setEnabled(True)
+
+    @Slot()
+    def _on_save_filter_settings(self):
+        filter_options = FilterOptions()
+        filter_options = self.get_data()[2].data(role = Qt.UserRole)
+        self.save_filter_settings_clicked.emit(filter_options)
 
 
 if __name__ == "__main__":
