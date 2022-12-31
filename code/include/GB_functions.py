@@ -97,7 +97,7 @@ def find_ffmpeg_files(dir:str)->dict:
     return result
 
 
-def get_model_from_source(type:MediaType, source, settings:SettingsData,fname:str = "")->list[QStandardItem]:
+def get_model_from_source(type:MediaType, source, settings:SettingsData, fname:str = "")->list[QStandardItem]:
     imd:ImportedMediaData = ImportedMediaData()
     imd.media_file_par = MediaFileParameters()
     mfd = imd.media_file_par
@@ -141,6 +141,7 @@ def get_model_from_source(type:MediaType, source, settings:SettingsData,fname:st
     res[4].setText(str(imd.end_frame))
     res[5].setText(str(mfd.framerate))
     res[6].setText("100")
+    res[6].setData(0.0, role=Qt.UserRole)
     res[7].setData(settings.looped_animation, role=Qt.CheckStateRole)
     res[7].setCheckable(True)
 

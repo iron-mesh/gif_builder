@@ -52,7 +52,6 @@ class GBDialogEditTask(QDialog):
             self._ui.btn_cancel.hide()
             self._ui.btn_addclose.hide()
             self._ui.btn_save_filter_setting.hide()
-            
 
 
 
@@ -67,6 +66,8 @@ class GBDialogEditTask(QDialog):
         self._ui.ip_export_file.set_path(i_list[2].data())
         self._ui.sb_framerate.setValue(int(i_list[5].data()))
         self._ui.sb_scale.setValue(int(i_list[6].data()))
+        max_size = i_list[6].data(role=Qt.UserRole) if i_list[6].data(role=Qt.UserRole) else 0.0
+        self._ui.max_size_dspinBox.setValue(max_size)
         logging.debug(i_list[7].data(role = Qt.CheckStateRole))
         if(i_list[7].data(role = Qt.CheckStateRole) == Qt.Checked):
             self._ui.cb_loopanimation.setChecked(True)
@@ -96,6 +97,7 @@ class GBDialogEditTask(QDialog):
         model.setData(i_list[4], str(imd.end_frame))
         model.setData(i_list[5], str(self._ui.sb_framerate.value()))
         model.setData(i_list[6], str(self._ui.sb_scale.value()))
+        model.setData(i_list[6], self._ui.max_size_dspinBox.value(), role=Qt.UserRole)
         model.setData(i_list[7], self._ui.cb_loopanimation.checkState(), role = Qt.CheckStateRole)
 
     def get_data(self)->list[QStandardItem]:
@@ -121,6 +123,7 @@ class GBDialogEditTask(QDialog):
         res[4].setText(str(imd.end_frame))
         res[5].setText(str(self._ui.sb_framerate.value()))
         res[6].setText(str(self._ui.sb_scale.value()))
+        res[6].setData(self._ui.max_size_dspinBox.value(), role=Qt.UserRole)
         res[7].setData(self._ui.cb_loopanimation.checkState(), role = Qt.CheckStateRole)
 
         res[0].setCheckable(True)
