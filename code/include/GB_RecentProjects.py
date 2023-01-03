@@ -1,19 +1,16 @@
-import os.path
+import os.path, logging
 
-from PySide2.QtCore import *
+
 from PySide2.QtGui import *
 from PySide2.QtWidgets import *
-from os.path import *
 from .GB_types import *
-from .GB_constants import *
-from math import *
-import logging
+import include.GB_constants as GBC
 
 logging.basicConfig(level=logging.DEBUG)
-if(LOGGING_DISABLED):
+if(GBC.LOGGING_DISABLED):
     logging.disable(logging.CRITICAL)
 
-max_length = 13
+MAX_LENGTH = 13
 save_file_path = r"./resources/recent_projects.txt"
 
 class RecentProjects:
@@ -68,7 +65,7 @@ class RecentProjects:
             recents_context_menu.setStyleSheet("font-size:16px")
             for i, e in enumerate(reversed(list)):
                 is_found:bool = os.path.exists(e)
-                title:str = f"{i + 1}. {os.path.basename(e)} {''if is_found else ('(' + LC_MSG_NOTFOUND + ')')}"
+                title:str = f"{i + 1}. {os.path.basename(e)} {''if is_found else ('(' + GBC.LC_MSG_NOTFOUND + ')')}"
                 action = QAction(title, self._parent)
                 action.triggered.connect(get_handler(e))
                 action.setStatusTip(e)
@@ -85,9 +82,10 @@ class RecentProjects:
             index = list.index(path)
             list.pop(index)
         else:
-            if len(list) >= max_length:
+            if len(list) >= MAX_LENGTH:
                 list.pop(0)
         list.append(path)
+
 
 
 

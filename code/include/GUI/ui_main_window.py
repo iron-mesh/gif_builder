@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'main_windowwmvmMj.ui'
+## Form generated from reading UI file 'main_windowhalTXc.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -1143,8 +1143,8 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.dwnld_build_button.setText(QCoreApplication.translate("MainWindow", u"Download", None))
         self.label_8.setText(QCoreApplication.translate("MainWindow", u"FFmpeg", None))
-        self.label_9.setText(QCoreApplication.translate("MainWindow", u"Looped animation by default", None))
-        self.checkBox_looped_animation.setText(QCoreApplication.translate("MainWindow", u"Yes", None))
+        self.label_9.setText(QCoreApplication.translate("MainWindow", u"Loop animation by default", None))
+        self.checkBox_looped_animation.setText("")
 #if QT_CONFIG(tooltip)
         self.feedback_button.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:10pt;\">Feel free to contact me if you find a bug or have suggestions, ideas etc.</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)

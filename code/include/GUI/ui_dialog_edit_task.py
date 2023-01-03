@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'dialog_edit_taskIpghUA.ui'
+## Form generated from reading UI file 'dialog_edit_taskTcqHrh.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -119,6 +119,7 @@ class Ui_Dialog(object):
         self.max_size_dspinBox.setObjectName(u"max_size_dspinBox")
         self.max_size_dspinBox.setFont(font1)
         self.max_size_dspinBox.setLocale(QLocale(QLocale.English, QLocale.UnitedStates))
+        self.max_size_dspinBox.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
         self.max_size_dspinBox.setMaximum(99999999.989999994635582)
         self.max_size_dspinBox.setStepType(QAbstractSpinBox.AdaptiveDecimalStepType)
 
@@ -324,7 +325,16 @@ class Ui_Dialog(object):
         self.verticalLayout.addWidget(self.buttonBox)
 
         QWidget.setTabOrder(self.sb_framerate, self.sb_scale)
-        QWidget.setTabOrder(self.sb_scale, self.cb_loopanimation)
+        QWidget.setTabOrder(self.sb_scale, self.max_size_dspinBox)
+        QWidget.setTabOrder(self.max_size_dspinBox, self.cb_loopanimation)
+        QWidget.setTabOrder(self.cb_loopanimation, self.cb_stats_mode)
+        QWidget.setTabOrder(self.cb_stats_mode, self.cb_dither_mode)
+        QWidget.setTabOrder(self.cb_dither_mode, self.sb_bayer_scale)
+        QWidget.setTabOrder(self.sb_bayer_scale, self.cb_diff_mode)
+        QWidget.setTabOrder(self.cb_diff_mode, self.btn_save_filter_setting)
+        QWidget.setTabOrder(self.btn_save_filter_setting, self.btn_add)
+        QWidget.setTabOrder(self.btn_add, self.btn_addclose)
+        QWidget.setTabOrder(self.btn_addclose, self.btn_cancel)
 
         self.retranslateUi(Dialog)
         self.btn_addclose.clicked.connect(Dialog.accept)

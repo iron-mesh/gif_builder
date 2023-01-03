@@ -1744,7 +1744,7 @@ background-color: red</string>
                      </font>
                     </property>
                     <property name="text">
-                     <string>Looped animation by default</string>
+                     <string>Loop animation by default</string>
                     </property>
                    </widget>
                   </item>
@@ -1756,7 +1756,7 @@ background-color: red</string>
                      </font>
                     </property>
                     <property name="text">
-                     <string>Yes</string>
+                     <string/>
                     </property>
                    </widget>
                   </item>

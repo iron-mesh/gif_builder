@@ -14,6 +14,10 @@ if(LOGGING_DISABLED):
     logging.disable(logging.CRITICAL)
 
 
+MAX_SCALE = 100
+MIN_SCALE = 5
+STEP = 5
+
 class TaskHandler(QThread):
     task_changed = Signal(TaskHandlerResponse, bool) #2th arg: True - task started,  False - task finished
 
@@ -50,22 +54,92 @@ class TaskHandler(QThread):
             logging.debug(">>>>task started>>>>")
             self.task_changed.emit(response, True)
 
+            max_size_mb: float = float(model.item(row, 6).data(Qt.UserRole)) if model.item(row, 6).data(Qt.UserRole) else 0.0
+            max_size_bytes: int = int(max_size_mb * 1024 ** 2)
+            if (max_size_bytes > 0):
+                export_file_path:str = model.item(row, 2).text()
+                max_scale:int = MAX_SCALE
+                min_scale: int = MIN_SCALE
+                cur_scale:int = int(model.item(row, 6).text())
+                modif_exp_path:bool = True
+                exp_file_list:list = []
+                stop_cycle:bool = False
+            else:
+                modif_exp_path:bool = False
+
             try:
-                if not self._is_valid_task(row): raise Exception("task isn't valid").with_traceback()
-                cmd_palette, cmd = self._generate_commands(row)
+                if not self._is_valid_task(row):
+                    raise UserWarning("task isn't valid").with_traceback()
+                cmd_palette, cmd = self._generate_commands(row, modif_exp_path)
                 # pass 1 palette creation
                 with subprocess.Popen(cmd_palette, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE, startupinfo=startupinfo) as pr:
                     data, err = pr.communicate(timeout=600)
                     # logging.debug(f"data: {data}")
                     logging.debug(f"pass 1 error: {err}")
-                    if err: raise Exception("Palette creation, FFmpeg Error").with_traceback()
+                    if err:
+                        raise UserWarning("Palette creation, FFmpeg Error").with_traceback()
                 # pass 2 exporting
-                with subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE, startupinfo=startupinfo) as pr:
-                    data, err = pr.communicate(timeout=600)
-                    # logging.debug(f"data: {data}")
-                    logging.debug(f"pass 2 error: {err}")
-                    if err: raise Exception("Gif creation, FFmpeg Error").with_traceback()
-            except Exception as msg:
+
+                while 1:
+                    # if cur_scale in [e[2] for e in exp_file_list]: continue
+                    with subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE, startupinfo=startupinfo) as pr:
+                        data, err = pr.communicate(timeout=600)
+                        # logging.debug(f"data: {data}")
+                        logging.debug(f"pass 2 error: {err}")
+                        if err:
+                            raise UserWarning("Gif creation, FFmpeg Error").with_traceback()
+
+                    if(max_size_bytes > 0): #execute if max size defined
+                        real_fsize_bytes = os.stat(cmd[-1]).st_size
+                        exp_file_list.append([cmd[-1], max_size_bytes - real_fsize_bytes, cur_scale])
+
+                        if (real_fsize_bytes == max_size_bytes) or stop_cycle:
+                            break
+
+                        if (real_fsize_bytes > max_size_bytes):
+                            if(cur_scale == min_scale):
+                                break
+                            max_scale = cur_scale
+                        elif (real_fsize_bytes < max_size_bytes):
+                            if (cur_scale == max_scale):
+                                break
+                            min_scale = cur_scale
+
+                        if(max_scale - min_scale) > 5:
+                            cur_scale = int((max_scale - min_scale) / 2 // 5 * 5) + min_scale
+                        elif(real_fsize_bytes < max_size_bytes) and (max_scale - cur_scale == STEP):
+                            cur_scale = max_scale
+                            stop_cycle = True
+                        elif (real_fsize_bytes < max_size_bytes) and (max_scale - cur_scale == STEP):
+                            cur_scale = max_scale
+                            stop_cycle = True
+                        else:
+                            break
+
+                        model.item(row, 6).setText(str(cur_scale))
+                        cmd = self._generate_commands(row, modif_exp_path)[1]
+
+                    else: #execute if max size NOT defined
+                        break
+
+                if (max_size_bytes > 0):
+                    logging.debug(f"Exported files: {exp_file_list}")
+                    filtered_file_list = list(filter(lambda x: x[1]>=0, exp_file_list))
+                    if filtered_file_list:
+                        optimal_file = min(filtered_file_list, key=lambda x: x[1])[0]
+                    else:
+                        optimal_file = min(exp_file_list, key=lambda x: x[2])[0]
+                    for el in exp_file_list:
+                        if os.path.exists(el[0]):
+                            if el[0] == optimal_file:
+                                os.replace(optimal_file, export_file_path)
+                            else:
+                                os.remove(el[0])
+
+                if os.path.exists(cmd_palette[-1]):
+                    os.remove(cmd_palette[-1])
+
+            except UserWarning as msg:
                 logging.debug(f"Thread message: {msg}")
                 response.is_successful = False
             else:
@@ -112,7 +186,7 @@ class TaskHandler(QThread):
         return f"{export_dir}/{match_stage1.group(1)}%0{num_count}d{extention}", first_image_index
 
 
-    def _generate_commands(self, row:int)->tuple:
+    def _generate_commands(self, row:int, add_suffix:bool = False)->tuple:
         """Generates commands for ffmpeg ->(<palette creation>, <gif creation>)"""
         model:QStandardItemModel = self._parent._task_list_model
         imp_media_data:ImportedMediaData = model.item(row, 1).data(role=Qt.UserRole)
@@ -176,7 +250,13 @@ class TaskHandler(QThread):
 
         # command.append("-vsync")
         # command.append("0")
-        command.append(model.item(row, 2).text())
+        if add_suffix:
+            path, ext = os.path.splitext(model.item(row, 2).text())
+            scale = model.item(row, 6).text()
+            modified_exp_path = path + '-' + scale + ext
+            command.append(modified_exp_path)
+        else:
+            command.append(model.item(row, 2).text())
         command_palette.append(self._palette_path)
 
         logging.debug(f"pallete command: {command_palette}")

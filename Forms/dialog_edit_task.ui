@@ -234,6 +234,9 @@
        <property name="locale">
         <locale language="English" country="UnitedStates"/>
        </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
        <property name="maximum">
         <double>99999999.989999994635582</double>
        </property>
@@ -702,7 +705,16 @@
  <tabstops>
   <tabstop>sb_framerate</tabstop>
   <tabstop>sb_scale</tabstop>
+  <tabstop>max_size_dspinBox</tabstop>
   <tabstop>cb_loopanimation</tabstop>
+  <tabstop>cb_stats_mode</tabstop>
+  <tabstop>cb_dither_mode</tabstop>
+  <tabstop>sb_bayer_scale</tabstop>
+  <tabstop>cb_diff_mode</tabstop>
+  <tabstop>btn_save_filter_setting</tabstop>
+  <tabstop>btn_add</tabstop>
+  <tabstop>btn_addclose</tabstop>
+  <tabstop>btn_cancel</tabstop>
  </tabstops>
  <resources/>
  <connections>
@@ -713,8 +725,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>320</x>
-     <y>379</y>
+     <x>372</x>
+     <y>615</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -729,8 +741,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>409</x>
-     <y>379</y>
+     <x>455</x>
+     <y>615</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>
@@ -745,8 +757,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>237</x>
-     <y>434</y>
+     <x>255</x>
+     <y>679</y>
     </hint>
     <hint type="destinationlabel">
      <x>237</x>
@@ -761,8 +773,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>237</x>
-     <y>434</y>
+     <x>255</x>
+     <y>679</y>
     </hint>
     <hint type="destinationlabel">
      <x>237</x>

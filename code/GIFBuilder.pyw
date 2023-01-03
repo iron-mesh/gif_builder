@@ -522,7 +522,7 @@ class GIFBuilder (QMainWindow):
     def _on_soundalert_changed(self, state):
         if state and not os.path.exists(self.settings.sound_path):
             self.ui.soound_alert_checkBox.setCheckState(Qt.Unchecked)
-            QMessageBox.warning(self, LC_WARNING, LC_MSG_SOUND_ISNT_SELECTED, QMessageBox.Ok, QMessageBox.Ok)
+            QMessageBox.warning(self, GBC.LC_WARNING, GBC.LC_MSG_SOUND_ISNT_SELECTED, QMessageBox.Ok, QMessageBox.Ok)
 
 
     def closeEvent(self, e):

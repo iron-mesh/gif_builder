@@ -2,7 +2,7 @@ import enum
 
 from PySide2.QtCore import QCoreApplication
 
-LOGGING_DISABLED = True
+LOGGING_DISABLED = not True
 
 VERSION = "1.3.0dev"
 COMPATIBLE_VERSION_LIST = ["1.2.0a","1.2.0", "1.3.0dev", "1.3.0"]
