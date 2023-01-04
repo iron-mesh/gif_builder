@@ -81,7 +81,6 @@ class TaskHandler(QThread):
                 # pass 2 exporting
 
                 while 1:
-                    # if cur_scale in [e[2] for e in exp_file_list]: continue
                     with subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE, startupinfo=startupinfo) as pr:
                         data, err = pr.communicate(timeout=600)
                         # logging.debug(f"data: {data}")
@@ -110,11 +109,13 @@ class TaskHandler(QThread):
                         elif(real_fsize_bytes < max_size_bytes) and (max_scale - cur_scale == STEP):
                             cur_scale = max_scale
                             stop_cycle = True
-                        elif (real_fsize_bytes < max_size_bytes) and (max_scale - cur_scale == STEP):
-                            cur_scale = max_scale
+                        elif (real_fsize_bytes > max_size_bytes) and (cur_scale - min_scale == STEP):
+                            cur_scale = min_scale
                             stop_cycle = True
                         else:
                             break
+
+                        if stop_cycle and (cur_scale in [e[2] for e in exp_file_list]): break
 
                         model.item(row, 6).setText(str(cur_scale))
                         cmd = self._generate_commands(row, modif_exp_path)[1]

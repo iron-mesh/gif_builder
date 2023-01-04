@@ -597,16 +597,6 @@ class GIFBuilder (QMainWindow):
 
     @check_workingstate
     def dragEnterEvent(self, event) -> None:
-        # if event.mimeData().hasUrls():
-        #     event.setDropAction(Qt.MoveAction)
-        #     file_path = event.mimeData().urls()[0].toLocalFile()
-        #     extension = ".gbp"
-        #     if (os.path.splitext(file_path)[1] == extension):
-        #         event.accept()
-        #     else:
-        #         event.ignore()
-        # else:
-        #     event.ignore()
         if event.mimeData().hasUrls():
             event.accept()
         else:

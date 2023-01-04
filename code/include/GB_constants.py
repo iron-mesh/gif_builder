@@ -2,9 +2,9 @@ import enum
 
 from PySide2.QtCore import QCoreApplication
 
-LOGGING_DISABLED = not True
+LOGGING_DISABLED = True
 
-VERSION = "1.3.0dev"
+VERSION = "1.3.0"
 COMPATIBLE_VERSION_LIST = ["1.2.0a","1.2.0", "1.3.0dev", "1.3.0"]
 
 WIN_DOWNLOAD_BUILDS_URL = [{'title':QCoreApplication.translate("interface", "Windows builds by BtbN"), 'url':"https://github.com/BtbN/FFmpeg-Builds/releases" },
