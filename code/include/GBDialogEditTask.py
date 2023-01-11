@@ -128,7 +128,10 @@ class GBDialogEditTask(QDialog):
 
         res[0].setCheckable(True)
         res[7].setCheckable(True)
-        res[1].setData(replace(imd), role = Qt.UserRole)
+
+        imd_copy:ImportedMediaData = replace(imd)
+        imd_copy.media_file_par = replace(imd.media_file_par)
+        res[1].setData(imd_copy, role = Qt.UserRole)
 
         for item in res:
             item.setTextAlignment(Qt.AlignCenter)
