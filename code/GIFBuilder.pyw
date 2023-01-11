@@ -474,18 +474,16 @@ class GIFBuilder (QMainWindow):
         self.ui.start_button.setText(GBC.LC_BACK)
         self.ui.start_button.setStyleSheet("background-color: rgb(0, 0, 255); color: rgb(255, 255, 255)")
         self.ui.tableView.setEnabled(True)
-        #play sound
-        if self.ui.soound_alert_checkBox.checkState() and os.path.exists(self.settings.sound_path):
-            winsound.PlaySound(self.settings.sound_path, winsound.SND_FILENAME)
-            # fn = QUrl.fromLocalFile(self.settings.sound_path)
-            # sound.setSource(fn)
-            # sound.setLoopCount(1)
-            # sound.play()
 
-        if self.ui.after_converting_combobox.currentIndex() == 1: #power off
-            os.system('shutdown -s')
-        elif self.ui.after_converting_combobox.currentIndex() == 2: #restart
-            os.system("shutdown /r /t  1")
+        if sys.platform == "win32":
+            # play sound
+            if self.ui.soound_alert_checkBox.checkState() and os.path.exists(self.settings.sound_path):
+                winsound.PlaySound(self.settings.sound_path, winsound.SND_FILENAME)
+
+            if self.ui.after_converting_combobox.currentIndex() == 1: #power off
+                os.system('shutdown -s')
+            elif self.ui.after_converting_combobox.currentIndex() == 2: #restart
+                os.system("shutdown /r /t  1")
 
 
 
@@ -603,6 +601,7 @@ class GIFBuilder (QMainWindow):
             event.ignore()
 
     @check_workingstate
+    @check_ffprobe
     def dropEvent(self, event) -> None:
         if event.mimeData().hasUrls():
             img_extension:str = ""
