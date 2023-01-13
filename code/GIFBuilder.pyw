@@ -181,9 +181,13 @@ class GIFBuilder (QMainWindow):
     @Slot()
     def save_settings(self)->None:
         logging.debug("save settings")
+        file_setting_exist:bool = True
         saved_setting = SettingsData()
-        with open(r"settings.cfg", "rb") as s_file:
-            saved_setting = pickle.load(s_file)
+        try:
+            with open(r"settings.cfg", "rb") as s_file:
+                saved_setting = pickle.load(s_file)
+        except FileNotFoundError:
+            file_setting_exist = False
 
         self.settings.language_index = self.ui.cb_language.currentIndex()
         self.settings.ffmpeg_path = self.ui.inputpath_ffmpeg.get_path()
@@ -193,7 +197,7 @@ class GIFBuilder (QMainWindow):
         self.settings.def_framerate = self.ui.sb_default_framerate.value()
         self.settings.looped_animation =self.ui.checkBox_looped_animation.checkState()
 
-        if(pickle.dumps(saved_setting)!=pickle.dumps(self.settings)):
+        if not file_setting_exist or (pickle.dumps(saved_setting)!=pickle.dumps(self.settings)):
             logging.debug("Setting rewriting")
             with open(r"settings.cfg", "wb") as s_file:
                 pickle.dump(self.settings, s_file)
